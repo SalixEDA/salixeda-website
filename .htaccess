@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+
+# .htaccess
+RewriteEngine On
+
+# Все запросы (кроме реальных файлов и папок) направляем на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+# Для статических файлов (css, js, images) - без изменений
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|mp4)$ - [L]
+
+</IfModule>
+
+# Begin - Prevent Browsing and Set Default Resources
+Options -Indexes
+DirectoryIndex index.php index.html index.htm
+# End - Prevent Browsing and Set Default Resources

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>200 Success/Сайт успешно запущен</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="//www.hostland.ru/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="//static.hostland.ru/welcome/css/bootstrap-4.min.css" />
+    <style>
+      body {
+        font: 0.8em Arial, Helvetica, sans-serif;
+        position: relative;
+        z-index: 0;
+        margin: 0;
+        padding: 0 0 1em 0;
+        color: #000;
+        background: #fff;
+        font-size: 16px;
+      }
+      p {
+        line-height: 20px;
+      }
+      .hostname {
+        word-wrap: break-word;
+      }
+      .status-number {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-left: 15px;
+        background-color: #999;
+        color: #fff;
+        font-size: 30px;
+        border-radius: 3px;
+      }
+      .status-text {
+        display: block;
+        margin-left: 15px;
+        margin-top: 5px;
+        font-size: 16px;
+      }
+      .logo-container {
+        display: inline-flex;
+        width: 100%;
+        justify-content: flex-start;
+        position: relative;
+        left: -15px;
+      }
+      .logo-container__image {
+        width: 280px;
+        margin-bottom: 15px;
+      }
+      .tech-header {
+          font-size: 1.8em;
+          color: #777777;
+          line-height: 30px;
+      }
+      .decimal-list {
+        list-style-type: decimal;
+        padding-left: 15px;
+      }
+      .decimal-list__item {
+        margin-bottom: 5px;
+      }
+      .unordered-list {
+        padding-left: 0;
+        list-style-type: none;
+      }
+      .unordered-list__item {
+        margin-bottom: 4px;
+      }
+      .unordered-list__item:before {
+        color: #00aaff;
+        font-size: 18px;
+        content: '\2022';
+        padding-right: 7px;
+      }
+      .unordered-list__link {
+        border-bottom: 2px dotted #00aaff;
+      }
+      .unordered-list__link:hover {
+        border-bottom: none;
+        text-decoration: none;
+      }
+      .br-line {
+        height: 5px;
+        margin: 20px 0 15px;
+        background-color: rgb(135, 179, 218);
+      }
+      /* === === === */
+      .b-search {
+        font-size: 100%;
+        margin: 0;
+      }
+      .b-search__table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .b-search__under {
+        padding: 0;
+        vertical-align: top;
+      }
+      .b-search__input,
+      .b-search__button {
+        padding: 0;
+        vertical-align: middle;
+        border-collapse: collapse;
+      }
+      .b-search__submit {
+        font: 100% Arial, sans-serif;
+        margin: 0;
+      }
+      .b-search__under {
+        height: 18px;
+      }
+      .b-search__under .b-suggest {
+        margin-right: 4.85em;
+      }
+      .b-search__input .b-input__text:-moz-first-node {
+        height: 1.86em;
+      }
+      .b-search__wrap-input,
+      .b-search__wrap-button {
+        display: block;
+      }
+      .b-search__under_col_right {
+        width: 1%;
+        padding: 3px 0 0 0.5em;
+      }
+      .b-search__empty {
+        padding: 0;
+      }
+      .b-search__under .b-suggest {
+        margin-right: 0;
+      }
+      .b-search__input {
+        width: 100%;
+      }
+      .b-search__input .b-form-input {
+        position: relative;
+        min-width: 3.2em;
+      }
+      .b-search__button {
+        padding-left: 6px;
+        vertical-align: middle;
+      }
+      .b-form-input {
+        display: block;
+      }
+      .b-form-input__box {
+        display: block;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-left: 0.3em;
+        border: 1px solid;
+        border-color: #a3a3a3 #c6c6c6 #e5e5e5;
+        background: #fff;
+        -webkit-box-shadow: inset 0 1px 1px #cfcfcf;
+        -moz-box-shadow: inset 0 1px 1px #cfcfcf;
+        box-shadow: inset 0 1px 1px #cfcfcf;
+      }
+      .b-form-input__input {
+        font: 100% Arial, sans-serif;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border: 0;
+        outline: 0;
+        background: none;
+      }
+      .b-form-input_focused_yes .b-form-input__box {
+        -webkit-box-shadow: inset 0 1px 1px #cfcfcf, 0 0 1px #ffd94f,
+          0 0 1px #ffd94f, 0 0 2px #ffd94f;
+        -moz-box-shadow: inset 0 1px 1px #cfcfcf, 0 0 1px #ffd94f,
+          0 0 1px #ffd94f, 0 0 2px #ffd94f;
+        box-shadow: inset 0 1px 1px #cfcfcf, 0 0 1px #ffd94f, 0 0 1px #ffd94f,
+          0 0 2px #ffd94f;
+      }
+      .b-form-input_size_16 .b-form-input__hint,
+      .b-form-input_size_16 .b-form-input__input {
+        font-size: 16px;
+      }
+      .b-form-input_size_16 .b-form-input__box {
+        height: 26px;
+      }
+      @media all and (max-width: 767px) {
+        .logo-container {
+          justify-content: center;
+        }
+      }
+      @media all and (max-width: 570px) {
+        .status-container {
+          display: flex;
+          justify-content: center
+        }
+        .status-text {
+          display: flex;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="b-page b-page_type_boring">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-xl-4 col-lg-5 col-md-5 col-sm-7 col-12">
+          <a class="logo-container" href="//www.hostland.ru/">
+            <img class="logo-container__image" src="//static.hostland.ru/welcome/img/logo1.svg" alt="Хостланд" />
+          </a>
+        </div>
+        <div class="col-xl-8 col-lg-7 col-md-7 col-sm-5 col-12 mb-3">
+          <div class="status-container">
+              <span class="status-number">200</span>
+              <span class="status-text">Сайт успешно запущен</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div clas="row">
+        <div class="col-12">
+          <div class="mt-2 tech-main-content">
+            <div class="tech-header">Сайт <i><span class="hostname" style="font-size: 100%;"></span></i> успешно размещен</div>
+            <p class="mt-3 tech-main-content">Поздравляем Вас! Сайт <b class="hostname"></b> успешно прикреплен к технической площадке Hostland. <br /> Чтобы сменить данную страничку на Вашу собственную, Вам необходимо провести следующие действия:</p>
+            <ol class="decimal-list">
+              <li class="decimal-list__item">Авторизоваться по фтп</li>
+              <li class="decimal-list__item">Пройти в директорию с Вашим доменом, далее директории <i>./htdocs/www</i></li>
+              <li class="decimal-list__item">Удалить файл <i>index.html</i> и закачать вместо него свой собственный</li>
+            </ol>
+            <div class="tech-header mt-4">Мы знаем, что у Вас есть выбор — благодарим, что выбрали нас</div>
+            <div class="mt-3">
+              <p class="mb-1">Наши услуги:</p>
+              <ul class="unordered-list">
+                <li class="unordered-list__item">
+                  <a href="//www.hostland.ru" class="unordered-list__link">Хостинг сайтов</a>
+                </li>
+                <li class="unordered-list__item">
+                  <a href="//www.hostland.ru/services/domain/" class="unordered-list__link">Регистрация доменов</a>
+                </li>
+                <li class="unordered-list__item">
+                  <a href="//www.hostland.ru/tarif/vds" class="unordered-list__link">Хостинг VDS</a>
+                </li>
+                <li class="unordered-list__item">
+                  <a href="//www.hostland.ru/vds/about_extended_administration" class="unordered-list__link">Администрирование серверов</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p class="mt-4 mb-2">Поиск по сайту <b>www.hostland.ru</b>:</p>
+          <div
+            class="b-search-wrap"
+            style="margin-bottom:0px"
+          >
+            <form style="margin:0" action="//www.hostland.ru/search">
+              <table class="b-search">
+                <tbody>
+                  <tr>
+                    <td class="b-search__input">
+                      <span
+                        class="b-form-input b-form-input_size_16 i-bem"
+                        onclick="return {'b-form-input':{autoFocus:true}}"
+                        ><span class="b-form-input__box"
+                          ><input
+                            name="query"
+                            value=""
+                            maxlength="400"
+                            tabindex="1"
+                            class="b-form-input__input"/></span
+                      ></span>
+                    </td>
+                    <td class="b-search__button">
+                      <span
+                        onclick="return {'b-form-button':{}}"
+                        class="b-form-button b-form-button_theme_grey-no-transparent-22 b-form-button_height_22 i-bem"
+                        role="button"
+                        ><i class="b-form-button__left"></i
+                        ><input
+                          type="submit"
+                          value="Найти"
+                          class="b-form-button__input"
+                          tabindex="2"
+                      /></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="br-line"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <p style="font-size: 12px; padding-left: 15px;">Хостинг провайдер Hostland</p>
+        </div>
+      </div>
+    </div>
+            
+    <script>
+        function insertHostName() {
+            var selectors = document.querySelectorAll('.hostname');
+            var hostName = location.hostname; // 
+
+            for (var index = 0; index < selectors.length; index++) {
+                selectors[index].innerText = hostName;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            insertHostName();
+        });
+    </script>
+  </body>
+</html>
