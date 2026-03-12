@@ -3,13 +3,14 @@
 # .htaccess
 RewriteEngine On
 
+
+# Для статических файлов (css, js, images) - без изменений
+RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|mp4|zip)$ - [L]
+
 # Все запросы (кроме реальных файлов и папок) направляем на index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
-
-# Для статических файлов (css, js, images) - без изменений
-RewriteRule \.(css|js|jpg|jpeg|png|gif|ico|svg|mp4)$ - [L]
 
 </IfModule>
 

@@ -269,6 +269,25 @@ $gallerySettings = [
     min-width: 300px;
 }
 
+.zigzag {
+    overflow: hidden;  /* чтобы блок не схлопывался */
+    margin-bottom: 40px;
+}
+.zigzag-img {
+    float: left;
+    width: 200px;      /* нужный размер */
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+.zigzag.right .zigzag-img {
+    float: right;
+    margin-right: 0;
+    margin-left: 30px;
+}
+.zigzag-text {
+    overflow: hidden;  /* чтобы текст не обтекал лишнего */
+}
+
 /* ... остальные стили из предыдущего ответа ... */
 </style>
 
