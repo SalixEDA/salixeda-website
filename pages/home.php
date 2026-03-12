@@ -275,7 +275,7 @@ $gallerySettings = [
 }
 .zigzag-img {
     float: left;
-    width: 200px;      /* нужный размер */
+    width: 400px;      /* нужный размер */
     margin-right: 30px;
     margin-bottom: 20px;
 }
