@@ -1,8 +1,8 @@
 <?php
-// pages/blog-list.php
+// pages/articleList.php
 
 // Загружаем список записей
-$entriesFile = 'content/blog/entries.json';
+$entriesFile = 'content/news/entries.json';
 $entries = file_exists($entriesFile) ? json_decode(file_get_contents($entriesFile), true) : [];
 $entries = $entries['entries'] ?? [];
 

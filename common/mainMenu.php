@@ -35,17 +35,17 @@ $menuItems = [
             'en' => 'History, features, roadmap'
         ],
         'submenu' => [
-            'history' => [
-                'name' => ['ru' => 'История проекта', 'en' => 'Project history'],
-                'description' => ['ru' => 'Более 25 лет развития', 'en' => 'Over 25 years of development']
-            ],
             'features' => [
                 'name' => ['ru' => 'Возможности', 'en' => 'Features'],
                 'description' => ['ru' => 'Полный перечень функций', 'en' => 'Complete feature list']
             ],
-            'blog' => [
-                'name' => ['ru' => 'Планы развития', 'en' => 'Roadmap'],
-                'description' => ['ru' => 'Будущие обновления и улучшения', 'en' => 'Future updates and improvements']
+            'news' => [
+                'name' => ['ru' => 'Новости', 'en' => 'News'],
+                'description' => ['ru' => 'Обновления и последние события проекта', 'en' => 'Project updates and latest developments']
+            ],
+            'history' => [
+                'name' => ['ru' => 'История проекта', 'en' => 'Project history'],
+                'description' => ['ru' => 'Более 25 лет развития', 'en' => 'Over 25 years of development']
             ]
         ]
     ],
@@ -64,9 +64,9 @@ $menuItems = [
                 'name' => ['ru' => 'Видеоуроки', 'en' => 'Video tutorials'],
                 'description' => ['ru' => 'Наглядные обучающие ролики', 'en' => 'Visual tutorial videos']
             ],
-            'libraries' => [
-                'name' => ['ru' => 'Библиотеки', 'en' => 'Libraries'],
-                'description' => ['ru' => 'Готовые компоненты и проекты', 'en' => 'Ready components and projects']
+            'articles' => [
+                'name' => ['ru' => 'Статьи', 'en' => 'Articles'],
+                'description' => ['ru' => 'Статьи, практические примеры использования системы', 'en' => 'Articles, practical guides and feature tutorials']
             ],
             'support' => [
                 'name' => ['ru' => 'Поддержка', 'en' => 'Support'],

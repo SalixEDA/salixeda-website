@@ -1,256 +1,280 @@
 <?php
-// pages/home.php
+$content = loadPageContent('home');
 
-$content = loadPageContent( 'home' );
+$galleryContent   = extractSection($content,'GALLERY');
+$featuresContent  = extractSection($content,'FEATURES');
+$sidebarContent   = extractSection($content,'SIDEBAR');
+$mainNewsContent  = extractSection($content,'MAINNEWS');
+$trailNewsContent = extractSection($content,'TRAILNEWS');
+$articlesContent  = extractSection($content,'ARTICLES');
 
-// Извлекаем секции
-$galleryContent = extractSection($content, 'GALLERY');
-$featuresContent = extractSection($content, 'FEATURES');
-$sidebarContent = extractSection($content, 'SIDEBAR');
 
-// Настройки галереи (можно вынести в конфиг)
+// Автоматическое формирование новостей
+// Загружаем список записей
+$entriesFile = 'content/news/entries.json';
+$entries = file_exists($entriesFile) ? json_decode(file_get_contents($entriesFile), true) : [];
+$entries = $entries['entries'] ?? [];
+
+// Сортируем по дате (новые сначала)
+usort($entries, function($a, $b) {
+    return strcmp($b['date'], $a['date']);
+});
+
+// Получаем 5 последних записей для правой колонки
+$latestEntries = array_slice($entries, 0, 4);
+
+
+//Автоматическое формирование списка последних статей
+$articlesFile = 'content/articles/entries.json';
+$articles = file_exists($articlesFile) ? json_decode(file_get_contents($articlesFile), true) : [];
+$articles = $articles['entries'] ?? [];
+
+// Сортируем по дате (новые сначала)
+usort($articles, function($a, $b) {
+    return strcmp($b['date'], $a['date']);
+});
+
+// Получаем 4 последних записей для правой колонки
+$latestArticles = array_slice($articles, 0, 4);
+
+
 $gallerySettings = [
-    'interval' => 5000, // 5 секунд между сменой слайдов
-    'transition' => 800, // длительность анимации в мс
-    'autoPlay' => true
+    'interval'=>5000,
+    'transition'=>700,
+    'autoPlay'=>true
 ];
 ?>
 
-<!-- ГАЛЕРЕЯ - ИСПРАВЛЕННАЯ ВЕРСИЯ -->
-<section class="gallery-section">
-    <div class="gallery-container" 
-         data-interval="<?= $gallerySettings['interval'] ?>" 
-         data-transition="<?= $gallerySettings['transition'] ?>"
-         data-autoplay="<?= $gallerySettings['autoPlay'] ? 'true' : 'false' ?>">
-        
-        <div class="gallery-slides">
-            <?php if (!empty($galleryContent)): ?>
-                <?= $galleryContent ?>
-            <?php else: ?>
-                <!-- Заглушка если нет контента -->
-                <div class="slide active">
-                    <img src="/images/slides/default.jpg" alt="CircuitCAD">
-                    <div class="caption">
-                        <h3>CircuitCAD</h3>
-                        <p><?= $lang == 'ru' ? 'Профессиональная САПР для схемотехники' : 'Professional CAD for circuit design' ?></p>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-        
-        <!-- Навигация галереи -->
-        <div class="gallery-nav">
-            <button class="gallery-prev" aria-label="<?= $lang == 'ru' ? 'Предыдущий слайд' : 'Previous slide' ?>">‹</button>
-            <div class="gallery-dots">
-                <!-- Точки будут добавлены JavaScript -->
-            </div>
-            <button class="gallery-next" aria-label="<?= $lang == 'ru' ? 'Следующий слайд' : 'Next slide' ?>">›</button>
-        </div>
-        
-        <!-- Ссылка "Подробнее" -->
-        <div class="gallery-more">
-            <a href="#" class="more-link" style="display: none;">
-                <?= $lang == 'ru' ? 'Подробнее →' : 'Learn more →' ?>
-            </a>
-        </div>
-    </div>
-</section>
+<section class="hero">
 
-<!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
-<div class="home-content">
-    <main class="main-features">
-        <?= !empty($featuresContent) ? $featuresContent : '' ?>
-        
-        <div class="all-features-link">
-            <a href="/about/features" class="btn btn-large">
-                <?= $lang == 'ru' ? 'Все возможности' : 'All features' ?>
-            </a>
-        </div>
-    </main>
-    
-    <aside class="home-sidebar">
-        <?= !empty($sidebarContent) ? $sidebarContent : '' ?>
-    </aside>
+<div class="hero-container"
+     data-interval="<?=$gallerySettings['interval']?>"
+     data-transition="<?=$gallerySettings['transition']?>"
+     data-autoplay="<?=$gallerySettings['autoPlay']?'true':'false'?>">
+
+<div class="slides">
+
+<?= $galleryContent ?>
+
 </div>
 
+<div class="hero-nav">
+<button class="prev">‹</button>
+<div class="dots"></div>
+<button class="next">›</button>
+</div>
+
+</div>
+</section>
+
+
+<div class="home-content">
+
+<main class="main-features">
+<?= $featuresContent ?>
+</main>
+
+<aside class="home-sidebar">
+
+  <div class="sidebar-data">
+    <!-- Главное + новости -->
+    <div class="news-block">
+      <?= $mainNewsContent ?>
+
+      <?php foreach ($latestEntries as $entry): ?>
+        <div class="news-item">
+          <div class="news-date"><?= date('d.m.Y', strtotime($entry['date'])) ?></div>
+          <h4><a href="/news/<?= htmlspecialchars($entry['id']) ?>">
+                <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
+              </a>
+          </h4>
+          <p>
+            <?= htmlspecialchars($entry['excerpt'][$lang] ?? $entry['excerpt']['ru'] ?? '') ?>
+          </p>
+        </div>
+      <?php endforeach; ?>
+
+      <?= $trailNewsContent ?>
+    </div>
+  </div>
+
+
+  <div class="blog-block">
+      <?= $articlesContent ?>
+
+      <?php foreach ($latestArticles as $entry): ?>
+        <div class="blog-item">
+          <a href="/articles/<?= htmlspecialchars($entry['id']) ?>">
+                <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
+          </a>
+        </div>
+      <?php endforeach; ?>
+  </div>
+
+</aside>
+
+</div>
+
+
+
 <style>
-/* ОБНОВЛЕННЫЕ СТИЛИ ГАЛЕРЕИ */
 
-/* Галерея - фикс первоначального отображения */
-.gallery-section {
-    background: #1a252f;
-    margin: 0 0 40px 0;
-    position: relative;
-    overflow: hidden;
-    height: 500px;
+/* HERO */
+
+.hero{
+background:#1a252f;
+overflow:hidden;
 }
 
-.gallery-container {
-    position: relative;
-    height: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+.hero-container{
+max-width:1400px;
+margin:auto;
+position:relative;
+height:400px;
 }
 
-/* Слайды - ВАЖНО: первый слайд видим сразу */
-.gallery-slides {
-    position: relative;
-    height: 100%;
-    width: 100%;
+.slides{
+position:relative;
+height:100%;
 }
 
-.gallery-slides .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    z-index: 1;
+/* slide */
+
+.slide{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+opacity:0;
+pointer-events:none;
 }
 
-
-/* Когда JS отработает, он добавит класс .active */
-.gallery-slides .slide.active {
-    opacity: 1 !important;
-    z-index: 3 !important;
+.slide.active{
+opacity:1;
+pointer-events:auto;
 }
 
-.gallery-slides .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
+/* layout */
+
+.slide-layout{
+display:flex;
+align-items:center;
+width:100%;
+gap:40px;
+padding:40px;
 }
 
-.gallery-slides .caption {
-    position: absolute;
-    bottom: 80px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: white;
-    padding: 0 20px;
-    z-index: 4;
-    max-width: 800px;
-    margin: 0 auto;
+/* text column */
+
+.slide-text{
+flex:1;
+color:white;
+opacity:0;
+transition:opacity .6s;
 }
 
-.gallery-slides .caption h3 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+.slide.active .slide-text{
+color:white;
+opacity:1;
 }
 
-.gallery-slides .caption p {
-    font-size: 20px;
-    opacity: 0.9;
-    text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+.slide-text h2{
+font-size:40px;
+margin-bottom:20px;
 }
 
-/* Навигация галереи */
-.gallery-nav {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    z-index: 10;
+.slide-text p{
+font-size:20px;
+margin-bottom:30px;
+line-height:1.4;
 }
 
-.gallery-prev,
-.gallery-next {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 11;
+/* buttons */
+
+.slide-buttons a{
+display:inline-block;
+margin-right:10px;
+padding:10px 18px;
+border-radius:4px;
+text-decoration:none;
+font-weight:bold;
 }
 
-.gallery-prev:hover,
-.gallery-next:hover {
-    background: rgba(255,255,255,0.3);
-    transform: scale(1.1);
+.btn-download{
+background:#3498db;
+color:white;
 }
 
-.gallery-dots {
-    display: flex;
-    gap: 10px;
-    z-index: 11;
+.btn-more{
+background:rgba(255,255,255,.2);
+color:white;
 }
 
-.gallery-dots .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    cursor: pointer;
-    transition: all 0.3s;
+/* image */
+
+.slide-image{
+flex:1;
+display:flex;
+justify-content:flex-end;
 }
 
-.gallery-dots .dot.active {
-    background: #3498db;
-    transform: scale(1.2);
+.slide-image img{
+max-height:420px;
+transform:translateX(80px);
+opacity:0;
+transition:transform .7s ease,opacity .7s;
 }
 
-.gallery-dots .dot:hover {
-    background: rgba(255,255,255,0.5);
+.slide.active .slide-image img{
+transform:translateX(0);
+opacity:1;
 }
 
-/* Ссылка "Подробнее" */
-.gallery-more {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 11;
+/* nav */
+
+.hero-nav{
+position:absolute;
+bottom:20px;
+left:0;
+right:0;
+display:flex;
+justify-content:center;
+gap:20px;
 }
 
-.gallery-more .more-link {
-    background: rgba(52, 152, 219, 0.9);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s;
-    display: inline-block;
+.hero-nav button{
+width:36px;
+height:36px;
+border-radius:50%;
+border:none;
+background:rgba(255,255,255,.2);
+color:white;
+font-size:20px;
+cursor:pointer;
 }
 
-.gallery-more .more-link:hover {
-    background: rgba(41, 128, 185, 0.9);
-    transform: translateY(-2px);
+.dots{
+display:flex;
+gap:10px;
 }
 
-/* Анимация слайдов */
-@keyframes slideInRight {
-    from { 
-        transform: translateX(100%); 
-        opacity: 0; 
-    }
-    to { 
-        transform: translateX(0); 
-        opacity: 1; 
-    }
+.dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:rgba(255,255,255,.3);
+cursor:pointer;
 }
 
-.slide.active.slide-in {
-    animation: slideInRight 0.8s ease;
+.dot.active{
+background:#3498db;
 }
 
-/* Остальные стили (основной контент) такие же как были */
+/* main layout */
+
 .home-content {
     display: flex;
     max-width: 1400px;
@@ -288,153 +312,294 @@ $gallerySettings = [
     overflow: hidden;  /* чтобы текст не обтекал лишнего */
 }
 
-/* ... остальные стили из предыдущего ответа ... */
+
+/* NEWS */
+.home-sidebar > div {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.home-sidebar h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.block-icon {
+    font-size: 20px;
+}
+
+/* Новости */
+.news-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.news-date {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.news-item h4 {
+    margin: 0 0 8px 0;
+}
+
+.news-item h4 a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.news-item h4 a:hover {
+    color: #3498db;
+}
+
+.news-item p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.more-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.2s;
+}
+
+.more-link a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+
+.main-news-item {
+    background: #f4f8fc;
+    border-left: 3px solid #3498db;
+    padding: 12px 14px;
+    margin-bottom: 25px;
+}
+
+.main-news-item h4 {
+    margin: 0 0 6px 0;
+}
+
+.main-news-item h4 a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.main-news-item h4 a:hover {
+    color: #3498db;
+}
+
+.main-news-item p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+
+
+
+
+.news-header {
+    margin-top: 25px;
+}
+
+
+.blog-block {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border: 1px solid #e6e6e6;
+
+    border-radius: 4px;
+
+    background: #fafafa;
+
+}
+
+.blog-item {
+
+    margin-bottom: 12px;
+
+}
+
+.blog-item:last-child {
+
+    margin-bottom: 0;
+
+}
+
+.blog-item a {
+
+    color: #2c3e50;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+}
+
+.blog-item a:hover {
+
+    color: #3498db;
+
+}
+
+/*
+.news-block{
+background:#f7f7f7;
+padding:20px;
+border-radius:6px;
+}
+
+.news-item{
+margin-bottom:18px;
+padding-bottom:14px;
+border-bottom:1px solid #ddd;
+}
+
+.news-date{
+font-size:12px;
+color:#888;
+}
+
+.news-title{
+font-weight:bold;
+margin:4px 0;
+}
+
+.news-title a{
+text-decoration:none;
+}
+
+.news-text{
+font-size:14px;
+color:#444;
+}
+*/
 </style>
 
+
+
 <script>
-// ИСПРАВЛЕННЫЙ КОД ГАЛЕРЕИ
-document.addEventListener('DOMContentLoaded', function() {
-    const gallery = document.querySelector('.gallery-container');
-    if (!gallery) return;
-    
-    const slides = gallery.querySelectorAll('.slide');
-    if (slides.length === 0) return;
-    
-    const dotsContainer = gallery.querySelector('.gallery-dots');
-    const prevBtn = gallery.querySelector('.gallery-prev');
-    const nextBtn = gallery.querySelector('.gallery-next');
-    const moreLink = gallery.querySelector('.more-link');
-    
-    // Настройки
-    const interval = parseInt(gallery.dataset.interval) || 5000;
-    const transition = parseInt(gallery.dataset.transition) || 800;
-    const autoPlay = gallery.dataset.autoplay === 'true';
-    
-    let currentSlide = 0;
-    let slideInterval;
-    
-    // ИНИЦИАЛИЗАЦИЯ: делаем первый слайд активным
-    slides[0].classList.add('active');
-    
-    // Создаем точки навигации
-    slides.forEach((slide, index) => {
-        const dot = document.createElement('span');
-        dot.className = 'dot';
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-    
-    const dots = dotsContainer.querySelectorAll('.dot');
-    
-    // Функция перехода к слайду
-    function goToSlide(index) {
-        // Скрываем текущий слайд
-        slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
-        
-        // Показываем новый слайд с анимацией
-        currentSlide = index;
-        slides[currentSlide].classList.add('active');
-        slides[currentSlide].classList.add('slide-in');
-        dots[currentSlide].classList.add('active');
-        
-        // Убираем класс анимации после завершения
-        setTimeout(() => {
-            slides[currentSlide].classList.remove('slide-in');
-        }, transition);
-        
-        // Обновляем ссылку "Подробнее"
-        updateMoreLink();
-        
-        // Сбрасываем автоплеер
-        resetInterval();
-    }
-    
-    // Обновление ссылки "Подробнее"
-    function updateMoreLink() {
-        const currentSlideEl = slides[currentSlide];
-        const ref = currentSlideEl.dataset.ref;
-        
-        if (ref) {
-            moreLink.href = '/' + ref;
-            moreLink.style.display = 'inline-block';
-        } else {
-            moreLink.style.display = 'none';
-        }
-    }
-    
-    // Следующий слайд
-    function nextSlide() {
-        let next = currentSlide + 1;
-        if (next >= slides.length) next = 0;
-        goToSlide(next);
-    }
-    
-    // Предыдущий слайд
-    function prevSlide() {
-        let prev = currentSlide - 1;
-        if (prev < 0) prev = slides.length - 1;
-        goToSlide(prev);
-    }
-    
-    // Сброс интервала автоплеера
-    function resetInterval() {
-        if (autoPlay) {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, interval);
-        }
-    }
-    
-    // Обработчики кнопок (ПРОВЕРЬТЕ ЧТО ЭЛЕМЕНТЫ СУЩЕСТВУЮТ!)
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetInterval();
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetInterval();
-        });
-    }
-    
-    // Клавиатурная навигация
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            resetInterval();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-            resetInterval();
-        }
-    });
-    
-    // Пауза при наведении
-    gallery.addEventListener('mouseenter', () => {
-        if (autoPlay && slideInterval) {
-            clearInterval(slideInterval);
-        }
-    });
-    
-    gallery.addEventListener('mouseleave', () => {
-        if (autoPlay) {
-            resetInterval();
-        }
-    });
-    
-    // Инициализация
-    updateMoreLink();
-    if (autoPlay) {
-        slideInterval = setInterval(nextSlide, interval);
-    }
-    
-    // Убираем анимацию с первого слайда после загрузки
-    setTimeout(() => {
-        slides[0].classList.remove('slide-in');
-    }, 100);
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const hero=document.querySelector(".hero-container");
+if(!hero)return;
+
+const slides=hero.querySelectorAll(".slide");
+const dotsBox=hero.querySelector(".dots");
+const prev=hero.querySelector(".prev");
+const next=hero.querySelector(".next");
+
+let index=0;
+let timer=null;
+
+const interval=parseInt(hero.dataset.interval)||5000;
+const auto=hero.dataset.autoplay==="true";
+
+/* dots */
+
+slides.forEach((s,i)=>{
+const d=document.createElement("span");
+d.className="dot";
+if(i===0)d.classList.add("active");
+d.onclick=()=>go(i);
+dotsBox.appendChild(d);
+});
+
+const dots=dotsBox.querySelectorAll(".dot");
+
+/* init */
+
+slides[0].classList.add("active");
+
+/* change */
+
+function go(i){
+
+slides[index].classList.remove("active");
+dots[index].classList.remove("active");
+
+index=i;
+
+slides[index].classList.add("active");
+dots[index].classList.add("active");
+
+reset();
+}
+
+function nextSlide(){
+let i=index+1;
+if(i>=slides.length)i=0;
+go(i);
+}
+
+function prevSlide(){
+let i=index-1;
+if(i<0)i=slides.length-1;
+go(i);
+}
+
+/* buttons */
+
+next.onclick=nextSlide;
+prev.onclick=prevSlide;
+
+/* autoplay */
+
+function reset(){
+if(!auto)return;
+clearInterval(timer);
+timer=setInterval(nextSlide,interval);
+}
+
+if(auto)timer=setInterval(nextSlide,interval);
+
+/* swipe */
+
+let startX=0;
+
+hero.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+hero.addEventListener("touchend",e=>{
+let dx=e.changedTouches[0].clientX-startX;
+
+if(dx>50)prevSlide();
+if(dx<-50)nextSlide();
+});
+
 });
 
 </script>
+

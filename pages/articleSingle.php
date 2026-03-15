@@ -1,5 +1,5 @@
 <?php
-// pages/blog-single.php - С ПРАВИЛЬНЫМИ СТИЛЯМИ
+// pages/articleSingle.php - С ПРАВИЛЬНЫМИ СТИЛЯМИ
 
 global $lang;
 
@@ -7,7 +7,7 @@ global $lang;
 $postId = $params[0] ?? '';
 
 // Загружаем список всех записей
-$entriesFile = 'content/blog/entries.json';
+$entriesFile = 'content/articles/entries.json';
 $allEntries = file_exists($entriesFile) ? json_decode(file_get_contents($entriesFile), true) : [];
 $allEntries = $allEntries['entries'] ?? [];
 
