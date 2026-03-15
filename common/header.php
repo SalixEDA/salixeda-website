@@ -22,9 +22,11 @@ function isMenuItemActive($itemKey, $currentPage) {
     <nav class="main-nav">
         <!-- Логотип слева -->
         <div class="nav-left">
-            <a href="/" class="logo">Circuit<span>CAD</span></a>
+          <a href="/" class="logo">
+            <img src="images/logo.png" alt="CircuitCAD" class="logo-image">
+          </a>
         </div>
-        
+
         <!-- Основные пункты меню по центру -->
         <ul class="menu-list">
             <?php foreach ($menuItems as $key => $item): ?>
@@ -51,7 +53,7 @@ function isMenuItemActive($itemKey, $currentPage) {
                             
                             <?php foreach ($item['submenu'] as $subKey => $subItem): ?>
                             <div class="submenu-item">
-                                <a href="<?= $subKey ?>" class="submenu-link">
+                                <a href="/<?= $subKey ?>" class="submenu-link">
                                     <?= getMenuText($subItem['name'], $lang) ?>
                                 </a>
                                 <p class="submenu-description">
@@ -133,6 +135,34 @@ function isMenuItemActive($itemKey, $currentPage) {
 .logo:hover {
     opacity: 0.8;
 }
+
+.logo-image {
+    height: 80px;
+    width: auto;
+    display: block;
+    margin-top: 40px; /* Смещаем вверх на 10px */
+
+    /* Рамка и тень для эффекта парения */
+    border: 2px solid green;
+    box-shadow:
+        10px 10px 10px rgba(200, 200, 200, 0.4), /* Основная тень */
+        6px 6px 20px rgba(0.9, 0.9, 0.9, 0.15); /* Дополнительная тень для глубины */
+
+    /* Белая подложка на случай если PNG с прозрачностью */
+    //background-color: white;
+    //padding: 5px; /* Отступы внутри рамки */
+
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Эффект при наведении * /
+.logo:hover .logo-image {
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 12px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); / * Легкий подъем при наведении * /
+} */
+
 
 /* Основные пункты меню по центру */
 .menu-list {

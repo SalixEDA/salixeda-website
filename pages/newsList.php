@@ -27,7 +27,7 @@ $latestEntries = array_slice($entries, 0, 5);
                 <?php foreach ($entries as $entry): ?>
                 <article class="blog-entry" id="post-<?= htmlspecialchars($entry['id']) ?>">
                     <h2>
-                        <a href="/blog/<?= htmlspecialchars($entry['id']) ?>" 
+                        <a href="/news/<?= htmlspecialchars($entry['id']) ?>"
                            class="post-link"
                            data-post-id="<?= htmlspecialchars($entry['id']) ?>">
                             <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
@@ -58,7 +58,7 @@ $latestEntries = array_slice($entries, 0, 5);
                     </div>
                     <?php endif; ?>
                     
-                    <a href="/blog/<?= htmlspecialchars($entry['id']) ?>" class="read-more">
+                    <a href="/news/<?= htmlspecialchars($entry['id']) ?>" class="read-more">
                         <?= $lang == 'ru' ? 'Читать дальше →' : 'Read more →' ?>
                     </a>
                 </article>
@@ -74,7 +74,7 @@ $latestEntries = array_slice($entries, 0, 5);
             <ul class="latest-posts">
                 <?php foreach ($latestEntries as $entry): ?>
                 <li>
-                    <a href="/blog/<?= htmlspecialchars($entry['id']) ?>">
+                    <a href="/news/<?= htmlspecialchars($entry['id']) ?>">
                         <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
                     </a>
                     <small><?= date('d.m.Y', strtotime($entry['date'])) ?></small>
@@ -83,7 +83,7 @@ $latestEntries = array_slice($entries, 0, 5);
             </ul>
         </div>
         
-        <div class="sidebar-section">
+<!--        <div class="sidebar-section">
             <h3><?= $lang == 'ru' ? 'Категории' : 'Categories' ?></h3>
             <ul class="categories">
                 <li><a href="/blog?tag=release"><?= $lang == 'ru' ? 'Релизы' : 'Releases' ?></a></li>
@@ -101,6 +101,7 @@ $latestEntries = array_slice($entries, 0, 5);
                 <button type="submit"><?= $lang == 'ru' ? 'Подписаться' : 'Subscribe' ?></button>
             </form>
         </div>
+        -->
     </aside>
 </div>
 

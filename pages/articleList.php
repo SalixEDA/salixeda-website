@@ -27,7 +27,7 @@ $latestEntries = array_slice($entries, 0, 5);
                 <?php foreach ($entries as $entry): ?>
                 <article class="blog-entry" id="post-<?= htmlspecialchars($entry['id']) ?>">
                     <h2>
-                        <a href="/blog/<?= htmlspecialchars($entry['id']) ?>" 
+                        <a href="/articles/<?= htmlspecialchars($entry['id']) ?>"
                            class="post-link"
                            data-post-id="<?= htmlspecialchars($entry['id']) ?>">
                             <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
@@ -58,7 +58,7 @@ $latestEntries = array_slice($entries, 0, 5);
                     </div>
                     <?php endif; ?>
                     
-                    <a href="/blog/<?= htmlspecialchars($entry['id']) ?>" class="read-more">
+                    <a href="/articles/<?= htmlspecialchars($entry['id']) ?>" class="read-more">
                         <?= $lang == 'ru' ? 'Читать дальше →' : 'Read more →' ?>
                     </a>
                 </article>

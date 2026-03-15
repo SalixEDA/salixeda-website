@@ -41,7 +41,7 @@ if (!$currentEntry) {
 }
 
 // Загружаем содержимое записи
-$contentFile = "content/blog/{$postId}.html";
+$contentFile = "content/articles/{$postId}.html";
 if (!file_exists($contentFile)) {
     include 'pages/404.php';
     http_response_code(404);
