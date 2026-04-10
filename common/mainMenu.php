@@ -14,17 +14,17 @@ $menuItems = [
             'en' => 'Installation packages for Windows and Linux. Latest version, version archive.'
         ],
         'submenu' => [
-            'latest' => [
+            'download#downloads' => [
                 'name' => ['ru' => 'Последняя версия', 'en' => 'Latest version'],
-                'description' => ['ru' => 'Актуальная стабильная сборка', 'en' => 'Current stable build']
+                'description' => ['ru' => 'Актуальная стабильная сборка.', 'en' => 'Current stable build']
             ],
-            'archive' => [
-                'name' => ['ru' => 'Архив версий', 'en' => 'Version archive'],
-                'description' => ['ru' => 'Все предыдущие релизы', 'en' => 'All previous releases']
-            ],
-            'download#linux' => [
+            'download#requirements' => [
                 'name' => ['ru' => 'Системные требования', 'en' => 'System requirements'],
-                'description' => ['ru' => 'Аппаратные и программные требования', 'en' => 'Hardware and software requirements']
+                'description' => ['ru' => 'Аппаратные и программные требования. Минимальные ресурсы.', 'en' => 'Hardware and software requirements']
+            ],
+            'download#installation' => [
+                'name' => ['ru' => 'Установка', 'en' => 'Installation'],
+                'description' => ['ru' => 'Инструкции по установке', 'en' => 'Installation instructions']
             ]
         ]
     ],
