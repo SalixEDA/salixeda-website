@@ -1,0 +1,247 @@
+<!-- MAIN_START -->
+<article class="blog-post">
+    <div class="post-content">
+
+        <!-- WARNING FOR DEVELOPERS -->
+        <div class="dev-note">
+            <strong>🔧 For developers</strong><br>
+            This article is a technical journey into the world of building GUIs in Go.
+            If you are just a user of SalixEDA and want to learn about the program's new features —
+            this article may seem too deep for you.
+            But if you are a developer or just curious about "how it's made" —
+            welcome!
+        </div>
+
+        <p class="post-date">February 4, 2026</p>
+
+        <h1 id="intro">How I created my own GoGui for the SalixEDA installer</h1>
+
+        <p>During the rebranding process, the SalixEDA program received not only a new
+        name and a new website. I decided to completely replace the installation system.</p>
+
+        <p><strong>Spoiler:</strong> in the end, I wrote my own GUI framework
+        in Go from scratch, using C bindings and a font embedded in the binary. But let's go through it
+        step by step.</p>
+
+        <h2 id="problem">Why the old installation system no longer suited me</h2>
+
+        <p>The previous system was built on the excellent <strong>QtInstallerFramework</strong>.
+        It has many advantages:</p>
+
+        <ul>
+            <li>Cross-platform (Windows and Linux "out of the box")</li>
+            <li>Multilingual (the installer's language depends on the user's settings)</li>
+            <li>Supports offline and online installation</li>
+            <li>Automatic uninstaller</li>
+        </ul>
+
+        <p>The system is beyond praise! <strong>But there is one "but".</strong></p>
+
+        <p>The QtInstallerFramework has no built-in update checking.
+        It is assumed that the installed program itself should handle this,
+        which will call the updater when necessary.</p>
+
+        <p>I wanted the installer to handle the update checking itself.
+        Here's the scheme that emerged:</p>
+
+        <ol>
+            <li>The main program never runs on its own.</li>
+            <li>The <strong>installer-updater</strong> always runs.</li>
+            <li>It periodically checks the server for updates.</li>
+            <li>If an update is available — it offers the user to install it.</li>
+            <li>After the update — it launches the current version of the program.</li>
+            <li>If the user declines — it launches the current version.</li>
+        </ol>
+
+        <p>In addition to checking for updates, this approach has another advantage:
+        for Linux, it is necessary to set the environment variables required for
+        the main program to work. This task is also convenient to delegate to the
+        installer-updater-launcher.</p>
+
+        <p>And you can also add an uninstall function to it — so you don't have to
+        create a separate program with a GUI. The installer is already perfectly aware of all
+        installed files.</p>
+
+        <h2 id="why-go">Why Go?</h2>
+
+        <p>Around the same time, I had another approach to the Go language.
+        And I really liked it as a solution for service tasks. A global component library
+        and private cloud libraries had already been built on it.
+        And besides, it has a wonderful ability to build applications for
+        different OSes.</p>
+
+        <p>I thought: "What if I make this installer-updater-launcher
+        in Go?" And I promptly set about implementing it.</p>
+
+        <h2 id="first-attempt">First attempt: Fyne</h2>
+
+        <p>For the GUI, I preliminarily chose <strong>Fyne</strong> — it's essentially the only
+        cross-platform GUI library for Go (although with caveats: for Linux
+        you need to install OpenGL support libraries, which are most likely
+        already installed on the user's system).</p>
+
+        <p>Using vibe coding, I quickly wrote the core and the interface, tested it on Linux.
+        Everything worked. Things were moving towards completion, and I decided to check how it all looked
+        on Windows. <strong>And then it started...</strong> First, a song and dance to get it to compile
+        at all. I managed to overcome that, but another problem came: the application
+        crashed on startup. And here I got stuck for seven long days. Nothing helped,
+        and the worst part was that diagnostics didn't help — the application crashed before
+        any diagnostics could be performed.</p>
+
+        <h2 id="debugging">Debugging and an unexpected turn</h2>
+
+        <p>Then I decided to try the simplest option — create an empty Windows
+        window using only system tools (WinAPI). Here too, failure awaited —
+        the application also crashed on startup. <strong>However, the possibility of diagnostics appeared.</strong></p>
+
+        <p>I quickly found the cause of the crash — and the window started working.</p>
+
+        <p>I have some experience with QML, and I decided to try
+        building the interface "manually" in this simplest window. Especially since for an installer
+        the interface is not very complex.</p>
+
+        <p>Unexpectedly, the whole system turned out to be:</p>
+        <ul>
+            <li>Compact</li>
+            <li>Without external dependencies</li>
+            <li>Simple and understandable</li>
+        </ul>
+
+        <p>The aesthetics suffered, of course, but for this application, aesthetics are secondary.
+        After all, this is not the main application, but an auxiliary one. Besides, if
+        I spent more time, I could achieve aesthetics as well.</p>
+
+        <p>The saddest part was that I had to abandon the dialog for selecting the installation
+        directory. The reason is the lack of simple access to the native dialog.
+        And while this is solvable on Windows, on Linux it's bad. Of course, without
+        problems, I could implement this dialog manually, but I haven't
+        done that yet, considering that very few people choose an alternative installation directory.</p>
+
+        <h2 id="linux">Linux: first experience with X11</h2>
+
+        <p>While everything was clear to me with Windows (I have experience programming
+        with WinAPI), with Linux everything was for the first time. I had never programmed
+        a Linux window (X11) using only system calls.</p>
+
+        <p>Here again, vibe coding came to the rescue. It turned out that it's not so scary.</p>
+
+        <h2 id="architecture">Architecture of the resulting GoGui</h2>
+
+        <p>As a result, a GUI "library" for Go was born:</p>
+
+        <ul>
+            <li><strong>System-dependent parts</strong> — two small C files,
+            which are linked into the Go program build depending on the target system.</li>
+            <li><strong>Low-level graphics</strong> — also in C, but already common for
+            Windows and Linux.</li>
+            <li><strong>Object hierarchy</strong> (like in QML) — implemented in Go,
+            and for direct drawing, C functions are called.</li>
+        </ul>
+
+        <h2 id="text">The hardest part: text and fonts</h2>
+
+        <p>The "stinkiest" part in terms of drawing turned out to be <strong>text</strong>.
+        Unicode support was required for a multilingual interface.</p>
+
+        <p>It quickly became apparent that the font systems in Windows and Linux are not very similar.
+        To avoid requiring the installation of third-party programs
+        or libraries, I decided to <strong>embed the font directly into the installer</strong>.</p>
+
+        <p>I took a TTF file of a ready-made font and inserted it directly into the GUI code.
+        It remained necessary to parse this file and draw characters.</p>
+
+        <p>Here <strong>stb_truetype.h by Sean Barrett</strong> came to the rescue,
+        for which a huge human <strong>THANK YOU</strong>! Without this library,
+        the project could not have been completed.</p>
+
+        <h2 id="polishing">Polishing and the final result</h2>
+
+        <p>After that, some polishing was done:</p>
+        <ul>
+            <li>Differences between operating systems were leveled out</li>
+            <li>Drawing artifacts were eliminated</li>
+            <li>An uninstall function was added (so as not to create a separate GUI program)</li>
+        </ul>
+
+        <p>Currently, this GoGui is used for the
+        <strong>installer-updater-launcher-uninstaller</strong> program. All in one package!</p>
+
+        <h2 id="future">Thoughts about the future</h2>
+
+        <p>I even thought about releasing this GUI library as a simple solution for Go programs.
+        For now, I decided not to bother, although the ability to build applications on Linux for both Linux
+        and Windows (and potentially for Android) is impressive.</p>
+
+        <p>Maybe someday I will return to this idea. For now, the library lives
+        inside the SalixEDA installer and does its job perfectly.</p>
+
+        <h2 id="conclusion">Conclusion: what I took away from this experience</h2>
+
+        <ul>
+            <li><strong>Don't be afraid to write "your own wheels".</strong> Sometimes it's faster
+            than figuring out someone else's bugs.</li>
+            <li><strong>Vibe coding works.</strong> Especially when you have
+            a clear understanding of what needs to be done.</li>
+            <li><strong>stb_truetype.h is magic.</strong> Huge thanks to Sean Barrett.</li>
+            <li><strong>Go + C is a great combination</strong> for system programming
+            with high-level logic.</li>
+        </ul>
+
+        <h2 id="opensource">The source code is open</h2>
+
+        <p>The installer program (and all of GoGui along with it) is located in the main
+        SalixEDA repository on GitHub:</p>
+
+        <p><a href="https://github.com/SalixEDA/SalixEDA.git" class="github-link">
+        https://github.com/SalixEDA/SalixEDA.git</a></p>
+
+        <p>The installer source code can be found in the <code>installer/</code> subdirectory.
+        I invite you to study, fork, and improve!</p>
+
+    </div>
+</article>
+<!-- MAIN_END -->
+
+
+
+
+
+<!-- NAV_START -->
+<ul>
+    <li><a href="#intro">How I created my own GoGui</a></li>
+    <li><a href="#problem">Why the old installation system didn't suit me</a></li>
+    <li><a href="#why-go">Why Go?</a></li>
+    <li><a href="#first-attempt">First attempt: Fyne</a>
+        <ul>
+            <li><a href="#debugging">7 days of debugging on Windows</a></li>
+        </ul>
+    </li>
+    <li><a href="#linux">Linux: first experience with X11</a></li>
+    <li><a href="#architecture">Architecture of the resulting GoGui</a></li>
+    <li><a href="#text">The hardest part: text and fonts</a></li>
+    <li><a href="#polishing">Polishing and the final result</a></li>
+    <li><a href="#future">Thoughts about the future</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#opensource">Source code on GitHub</a></li>
+</ul>
+<!-- NAV_END -->
+
+
+
+<!-- ASIDE_START -->
+<div class="aside-content">
+    <h4>Article summary</h4>
+    <p>How I spent 7 days debugging on Windows and wrote my own GUI framework in Go from scratch, using C bindings and a font embedded in the binary.</p>
+
+    <h4 style="margin-top: 20px;">Key technologies</h4>
+    <ul>
+        <li>Go</li>
+        <li>C (WinAPI / X11)</li>
+        <li>stb_truetype.h</li>
+        <li>Fyne (didn't work out)</li>
+    </ul>
+
+    <h4 style="margin-top: 20px;">Link</h4>
+    <p><a href="https://github.com/SalixEDA/SalixEDA.git">Source code on GitHub</a></p>
+</div>
+<!-- ASIDE_END -->
