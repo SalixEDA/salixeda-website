@@ -1,5 +1,5 @@
 <?php
-// pages/blog.php
+// pages/articles.php
 
 global $routeParams, $lang;
 

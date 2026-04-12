@@ -1,19 +1,74 @@
 {
+  "title": {
+    "ru": "Новости",
+    "en": "News"
+    },
+  "empty": {
+    "ru": "Пока нет новостей",
+    "en": "No news yet"
+    },
+  "more": {
+    "ru": "Читать дальше →",
+    "en": "Read more →"
+    },
+  "last": {
+    "ru": "Последние новости",
+    "en": "Last news"
+    },
+  "singAbout" : {
+    "ru": "О новости",
+    "en": "About news"
+    },
+  "singDate" : {
+    "ru": "Дата:",
+    "en": "Date:"
+    },
+  "singAuthor" : {
+    "ru": "Автор:",
+    "en": "Author:"
+    },
+  "singRTime" : {
+    "ru": "Время чтения:",
+    "en": "Read time:"
+    },
+  "singTags" : {
+    "ru": "Тэги:",
+    "en": "Tags:"
+    },
+  "singBack" : {
+    "ru": "К списку новостей",
+    "en": "Back to news list"
+    },
+  "singPrev" : {
+    "ru": "Предыдущая новость",
+    "en": "Previous news"
+    },
+  "singNext" : {
+    "ru": "Следующая новость",
+    "en": "Next news"
+    },
+  "singContents" : {
+    "ru": "Содержание",
+    "en": "Contents"
+    },
+
+
+
   "entries": [
     {
-      "id": "2024-03-15-release-2-5",
+      "id": "2026-01-15-release-3-0",
       "title": {
-        "ru": "Релиз CircuitCAD 2.5",
-        "en": "CircuitCAD 2.5 Release"
+        "ru": "Релиз SalixEDA 3.0",
+        "en": "SalixEDA 3.0 Release"
       },
-      "date": "2024-03-15",
-      "author": "admin",
+      "date": "2026-01-15",
+      "author": "A.Sibilev",
       "excerpt": {
-        "ru": "Добавлена поддержка STEP экспорта и улучшена трассировка дифференциальных пар.",
-        "en": "Added STEP export support and improved differential pair routing."
+        "ru": "SalixEDA v3.0 — новый этап развития и полный ребрендинг проекта",
+        "en": "SalixEDA v3.0 — a new stage of development and a complete rebranding of the project."
       },
       "tags": ["release", "new-features", "update"],
-      "read_time": "5 min"
+      "read_time": "1 min"
     },
     {
       "id": "2024-01-10-new-simulation",

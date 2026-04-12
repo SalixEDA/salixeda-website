@@ -23,7 +23,7 @@ function isMenuItemActive($itemKey, $currentPage) {
         <!-- Логотип слева -->
         <div class="nav-left">
           <a href="/" class="logo">
-            <img src="images/logo.png" alt="CircuitCAD" class="logo-image">
+            <img src="/images/logo.png" alt="SalixEDA" class="logo-image">
           </a>
         </div>
 

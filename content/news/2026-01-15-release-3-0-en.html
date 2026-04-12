@@ -1,0 +1,78 @@
+<!-- MAIN_START -->
+<article class="blog-post">
+    <div class="post-content">
+        <p class="post-date">January 15, 2026</p>
+
+        <h2 id="release3_0">SalixEDA v3.0 — a new stage of development</h2>
+
+        <p>After 10 years of developing the SaliCAD project, which itself is the successor
+        to an even earlier development (see <a href="/history">project history</a>), I made
+        the decision to fully rebrand the project. Today I am pleased to announce that I have fully transitioned
+        to SalixEDA 3.0.</p>
+
+        <p>The rebranding affected more than just the name. In January 2026, I carried out a deep
+        update, the key change of which was a new concept for managing component libraries.</p>
+
+        <h2 id="library">Private cloud — libraries without publishing</h2>
+
+        <p>In SaliCAD, the cornerstone was the central public library.
+        It is good for common, public components. But many developers do not
+        want or cannot publish their work for various reasons:
+        trade secrets, NDAs, internal corporate standards, or simply a
+        desire to maintain control over the library.</p>
+
+        <p><strong>For such users, SalixEDA 3.0 introduces a private cloud.</strong></p>
+
+        <p>It is implemented as simply and freely as possible:</p>
+        <ul>
+            <li>Each user automatically receives space for a private cloud
+            on the SalixEDA server the first time they run the program.</li>
+            <li>The cloud is identified by a unique code, which is displayed
+            in the program settings.</li>
+            <li>You can share this code with colleagues or use it
+            on your other computers.</li>
+            <li>All users connected to the same cloud share a common library:
+            changes made by one are automatically synchronized with the local
+            storages of all others.</li>
+        </ul>
+
+        <p><strong>Visual difference:</strong> public components are now marked
+        with a blue globe in the toolbar and in the name. Private components
+        have no such indicator.</p>
+
+        <h3 id="moderation">Public library moderation</h3>
+
+        <p>To protect the public library from junk (inevitable when
+        novice users experiment with publishing), I have introduced
+        restrictions. Only registered users can now publish components.</p>
+
+        <p>Registration is extremely simple: just provide a nickname and (optionally)
+        an email address. It is only needed so that users
+        approach publishing thoughtfully, rather than doing it "for testing."</p>
+
+        <h2 id="other">New website and other changes</h2>
+
+        <p>The name change also entailed a server change. The previous site ran
+        on the GetSimple CMS, which is no longer supported. After reviewing the alternatives,
+        I decided to abandon ready-made CMS entirely and implemented my own
+        PHP engine, optimized for the needs of SalixEDA.</p>
+
+        <p>This turned out to be a very good decision — now maintaining the site
+        has become much easier, and performance has increased. I will talk about the structure
+        of the new site in a separate article.</p>
+    </div>
+</article>
+<!-- MAIN_END -->
+
+
+<!-- NAV_START -->
+<ul>
+    <li><a href="#release3_0">SalixEDA v3.0 — new stage</a></li>
+    <li><a href="#library">Private cloud</a>
+        <ul>
+            <li><a href="#moderation">Public library moderation</a></li>
+        </ul>
+    </li>
+    <li><a href="#other">New website and other changes</a></li>
+</ul>
+<!-- NAV_END -->

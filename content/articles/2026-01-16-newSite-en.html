@@ -1,0 +1,148 @@
+<!-- MAIN_START -->
+<article class="blog-post">
+    <div class="post-content">
+        <p class="post-date">February 15, 2026</p>
+
+        <h1 id="new-website">The New SalixEDA Website: How and Why We Built It</h1>
+
+        <p>During the rebranding process, the SalixEDA program got not only a new
+        name, but also an entirely new website. This was a necessary step, and today I’ll
+        explain why we had to abandon the old solution, what requirements we had for the new
+        website, and what the final result looks like.</p>
+
+        <h2 id="problem">Why the Old Website No Longer Worked</h2>
+
+        <p>The previous website was built on a tiny CMS called <strong>GetSimple</strong>.
+        Today, that project is no longer supported. But that wasn’t the main problem.</p>
+
+        <p>I noticed that when connection issues occurred, the page structure would start
+        to "fall apart" — probably due to external dependencies that the old CMS or its theme
+        used. This is unacceptable for a website that needs to be available at all times.</p>
+
+        <p><strong>That’s how the first requirement was born:</strong> absolutely no
+        external dependencies.</p>
+
+        <p>The second serious problem was the inconvenient way multilingual support was organized.
+        I needed the structure (skeleton) of the site to remain unchanged, while the content
+        (text and images) would change depending on the language. With GetSimple, I had to
+        maintain a separate site for each language, which was terribly inconvenient.
+        Interestingly, it did seem to have a multilingual system, but I couldn’t get it to work.
+        Nevertheless, GetSimple suggested an interesting idea: implement the structure in PHP,
+        and the content in HTML.</p>
+
+        <p><strong>That’s how the second requirement took shape:</strong> separate content
+        from structure, solving two problems at once — multilingual support and simplified
+        maintenance.</p>
+
+        <h2 id="alternatives">Why Ready-Made Solutions Didn’t Work</h2>
+
+        <p>I searched for a long time for solutions similar to GetSimple — and found none.
+        I tried alternatives:</p>
+
+        <ul>
+            <li><strong>Static site generators ("compilers")</strong> —
+            a great idea, but it didn’t work for me. Because compilation is required for
+            every change, the whole site needs to be regenerated. I found that too cumbersome.</li>
+            <li><strong>Large CMS (WordPress and the like)</strong> — I didn’t even
+            consider them. Their entry barrier is too high, and I didn’t want to spend time
+            on configuration. After all, I’m much more interested in developing SalixEDA
+            than in site administration.</li>
+        </ul>
+
+        <h2 id="solution">Our Own Solution: PHP + HTML</h2>
+
+        <p>After reviewing all available options, I came to an unexpected conclusion:
+        <strong>it’s much simpler to write exactly what you need in PHP</strong>.
+        Yes, it took time, but with vibe coding (and AI assistance) — not as much
+        as it would have taken before. Basic PHP knowledge and some HTML skills also helped.</p>
+
+        <p>And so, over a few evenings, <strong>the SalixEDA.org website was born</strong>
+        with exactly the functionality I needed:</p>
+
+        <ul>
+            <li>✅ No unnecessary bloat</li>
+            <li>✅ Completely free of external dependencies</li>
+            <li>✅ Simple and easy to maintain</li>
+            <li>✅ With multilingual support</li>
+        </ul>
+
+        <h2 id="tech">Technical Details (For Geeks)</h2>
+
+        <p>If you’re curious how it works internally — here’s a brief overview:</p>
+
+        <ul>
+            <li><strong>Core — index.php.</strong> Almost all requests are redirected to it
+            (the exception is direct file downloads, like in the "Downloads" section).</li>
+            <li><strong>Common procedures</strong> — in index.php. The interface language
+            selection is also implemented there.</li>
+            <li><strong>Page structure</strong> — in separate PHP files
+            (<code>home.php</code>, <code>news.php</code>, <code>features.php</code>, etc.).
+            Each defines the structure of a specific page.</li>
+            <li><strong>Content</strong> — in HTML files that are substituted depending
+            on the selected language.</li>
+        </ul>
+
+        <p>The variable that determines the language is propagated to every PHP file used
+        when building the page. This makes it possible to select the appropriate HTML file
+        for the corresponding language.</p>
+
+        <h2 id="opensource">The Source Code Is Open</h2>
+
+        <p>Like SalixEDA itself, the new website is an open source project.
+        The source code and all its contents are available on GitHub:</p>
+
+        <p><a href="https://github.com/SalixEDA/salixeda-website.git" class="github-link">
+        https://github.com/SalixEDA/salixeda-website.git</a></p>
+
+        <!-- NEW CONCLUSION -->
+        <h2 id="conclusion">The Result: What This Solution Gave Us</h2>
+
+        <p>Switching to our own PHP engine provided several important benefits:</p>
+
+        <ul>
+            <li><strong>Full control.</strong> I decide what works and how.
+            No hidden dependencies or CMS "surprises".</li>
+            <li><strong>Ease of maintenance.</strong> To add a new page or change the
+            structure, you don’t need to understand someone else’s code.</li>
+            <li><strong>Multilingual support out of the box.</strong> The mechanism works
+            exactly the way I want, without workarounds.</li>
+            <li><strong>Reliability.</strong> No external scripts — no problems with
+            loading them.</li>
+        </ul>
+
+        <p>Now the website is not "yet another task", but a convenient tool that
+        helps promote SalixEDA, rather than distracting from development.</p>
+    </div>
+</article>
+<!-- MAIN_END -->
+
+
+
+<!-- NAV_START -->
+<ul>
+    <li><a href="#new-website">The New SalixEDA Website</a></li>
+    <li><a href="#problem">Why the Old Website No Longer Worked</a>
+        <ul>
+            <li><a href="#problem">External dependencies</a></li>
+            <li><a href="#problem">Multilingual problems</a></li>
+        </ul>
+    </li>
+    <li><a href="#alternatives">Why Ready-Made Solutions Didn’t Work</a>
+        <ul>
+            <li><a href="#alternatives">Static generators</a></li>
+            <li><a href="#alternatives">Large CMS</a></li>
+        </ul>
+    </li>
+    <li><a href="#solution">Our Own Solution: PHP + HTML</a></li>
+    <li><a href="#tech">Technical Details</a></li>
+    <li><a href="#opensource">Source Code on GitHub</a></li>
+    <li><a href="#conclusion">The Result</a></li>
+</ul>
+<!-- NAV_END -->
+
+
+!-- ASIDE_START -->
+<p>Link to source code
+<a href="https://github.com/SalixEDA/salixeda-website.git" class="github-link">
+        https://github.com/SalixEDA/salixeda-website.git</a></p>
+<!-- ASIDE_END -->

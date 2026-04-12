@@ -4,6 +4,11 @@
 // Загружаем список записей
 $entriesFile = 'content/articles/entries.json';
 $entries = file_exists($entriesFile) ? json_decode(file_get_contents($entriesFile), true) : [];
+$atitle  = $entries['title'];
+$empty   = $entries['empty'];
+$more    = $entries['more'];
+$last    = $entries['last'];
+
 $entries = $entries['entries'] ?? [];
 
 // Сортируем по дате (новые сначала)
@@ -18,11 +23,11 @@ $latestEntries = array_slice($entries, 0, 5);
 <div class="blog-page">
     <!-- Основной контент -->
     <main class="blog-main" id="blog-main">
-        <h1><?= $lang == 'ru' ? 'Блог разработки' : 'Development Blog' ?></h1>
+        <h1><?= $atitle[$lang] ?></h1>
         
         <div class="blog-list" id="blog-list">
             <?php if (empty($entries)): ?>
-                <p class="no-posts"><?= $lang == 'ru' ? 'Пока нет записей в блоге.' : 'No blog posts yet.' ?></p>
+                <p class="no-posts"><?= $empty[$lang] ?></p>
             <?php else: ?>
                 <?php foreach ($entries as $entry): ?>
                 <article class="blog-entry" id="post-<?= htmlspecialchars($entry['id']) ?>">
@@ -59,7 +64,7 @@ $latestEntries = array_slice($entries, 0, 5);
                     <?php endif; ?>
                     
                     <a href="/articles/<?= htmlspecialchars($entry['id']) ?>" class="read-more">
-                        <?= $lang == 'ru' ? 'Читать дальше →' : 'Read more →' ?>
+                        <?= $more[$lang] ?>
                     </a>
                 </article>
                 <?php endforeach; ?>
@@ -70,11 +75,11 @@ $latestEntries = array_slice($entries, 0, 5);
     <!-- Правая колонка -->
     <aside class="blog-sidebar">
         <div class="sidebar-section">
-            <h3><?= $lang == 'ru' ? 'Последние записи' : 'Latest Posts' ?></h3>
+            <h3><?= $last[$lang] ?></h3>
             <ul class="latest-posts">
                 <?php foreach ($latestEntries as $entry): ?>
                 <li>
-                    <a href="/blog/<?= htmlspecialchars($entry['id']) ?>">
+                    <a href="/articles/<?= htmlspecialchars($entry['id']) ?>">
                         <?= htmlspecialchars($entry['title'][$lang] ?? $entry['title']['ru'] ?? '') ?>
                     </a>
                     <small><?= date('d.m.Y', strtotime($entry['date'])) ?></small>
@@ -83,24 +88,6 @@ $latestEntries = array_slice($entries, 0, 5);
             </ul>
         </div>
         
-        <div class="sidebar-section">
-            <h3><?= $lang == 'ru' ? 'Категории' : 'Categories' ?></h3>
-            <ul class="categories">
-                <li><a href="/blog?tag=release"><?= $lang == 'ru' ? 'Релизы' : 'Releases' ?></a></li>
-                <li><a href="/blog?tag=tutorial"><?= $lang == 'ru' ? 'Уроки' : 'Tutorials' ?></a></li>
-                <li><a href="/blog?tag=news"><?= $lang == 'ru' ? 'Новости' : 'News' ?></a></li>
-                <li><a href="/blog?tag=development"><?= $lang == 'ru' ? 'Разработка' : 'Development' ?></a></li>
-            </ul>
-        </div>
-        
-        <div class="sidebar-section">
-            <h3><?= $lang == 'ru' ? 'Подписаться' : 'Subscribe' ?></h3>
-            <p><?= $lang == 'ru' ? 'Получайте уведомления о новых записях:' : 'Get notified about new posts:' ?></p>
-            <form class="subscribe-form">
-                <input type="email" placeholder="<?= $lang == 'ru' ? 'Ваш email' : 'Your email' ?>" required>
-                <button type="submit"><?= $lang == 'ru' ? 'Подписаться' : 'Subscribe' ?></button>
-            </form>
-        </div>
     </aside>
 </div>
 

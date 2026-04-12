@@ -1,34 +1,87 @@
 {
+  "title": {
+    "ru": "Статьи",
+    "en": "Articles"
+    },
+  "empty": {
+    "ru": "Пока нет статей",
+    "en": "No articles yet"
+    },
+  "more": {
+    "ru": "Читать дальше →",
+    "en": "Read more →"
+    },
+  "last": {
+    "ru": "Последние статьи",
+    "en": "Last articles"
+    },
+  "singAbout" : {
+    "ru": "О статье",
+    "en": "About article"
+    },
+  "singDate" : {
+    "ru": "Дата:",
+    "en": "Date:"
+    },
+  "singAuthor" : {
+    "ru": "Автор:",
+    "en": "Author:"
+    },
+  "singRTime" : {
+    "ru": "Время чтения:",
+    "en": "Read time:"
+    },
+  "singTags" : {
+    "ru": "Тэги:",
+    "en": "Tags:"
+    },
+  "singBack" : {
+    "ru": "К списку статей",
+    "en": "Back to article list"
+    },
+  "singPrev" : {
+    "ru": "Предыдущая статья",
+    "en": "Previous article"
+    },
+  "singNext" : {
+    "ru": "Следующая статья",
+    "en": "Next article"
+    },
+  "singContents" : {
+    "ru": "Содержание",
+    "en": "Contents"
+    },
+
   "entries": [
     {
-      "id": "2024-03-15-release-2-5",
+      "id": "2026-01-22-stmPins",
       "title": {
-        "ru": "Релиз CircuitCAD 2.5",
-        "en": "CircuitCAD 2.5 Release"
+        "ru": "Решение проблемы многофункциональных выводов современных микроконтроллеров STM",
+        "en": "Solution to the problem of multifunctional outputs in modern STM microcontrollers"
       },
-      "date": "2024-03-15",
-      "author": "admin",
+      "date": "2026-01-22",
+      "author": "A.Sibilev",
       "excerpt": {
-        "ru": "Добавлена поддержка STEP экспорта и улучшена трассировка дифференциальных пар.",
-        "en": "Added STEP export support and improved differential pair routing."
+        "ru": "Как в SalixEDA решается проблема многофункциональных выводов современных микроконтроллеров на примере STM.",
+        "en": "How SalixEDA solves the problem of multifunctional pins in modern microcontrollers, using STM as an example."
       },
-      "tags": ["release", "new-features", "update"],
-      "read_time": "5 min"
+      "tags": ["symbol"],
+      "read_time": "3 min"
     },
     {
-      "id": "2024-01-10-new-simulation",
+      "id": "2026-01-16-newSite",
       "title": {
-        "ru": "Новый движок моделирования",
-        "en": "New Simulation Engine"
+        "ru": "Новый сайт SalixEDA",
+        "en": "New site for SalixEDA"
       },
-      "date": "2024-01-10",
-      "author": "admin",
+      "date": "2026-01-16",
+      "author": "A.Sibilev",
       "excerpt": {
-        "ru": "Встроенный симулятор схем с поддержкой SPICE моделей.",
-        "en": "Built-in circuit simulator with SPICE model support."
+        "ru": "Реализован новый сайт для SalixEDA на PHP и HTML",
+        "en": "New site released for SalixEDA on PHP and HTML"
       },
-      "tags": ["simulation", "engineering", "spice"],
-      "read_time": "8 min"
+      "tags": ["site"],
+      "read_time": "1 min"
     }
   ]
 }

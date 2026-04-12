@@ -9,6 +9,16 @@ $postId = $params[0] ?? '';
 // Загружаем список всех записей
 $entriesFile = 'content/news/entries.json';
 $allEntries = file_exists($entriesFile) ? json_decode(file_get_contents($entriesFile), true) : [];
+$singAbout  = $allEntries['singAbout'];
+$singDate   = $allEntries['singDate'];
+$singAuthor = $allEntries['singAuthor'];
+$singRTime  = $allEntries['singRTime'];
+$singTags   = $allEntries['singTags'];
+$singBack   = $allEntries['singBack'];
+$singPrev   = $allEntries['singPrev'];
+$singNext   = $allEntries['singNext'];
+$singContents = $allEntries['singContents'];
+
 $allEntries = $allEntries['entries'] ?? [];
 
 // Ищем текущую запись
@@ -41,7 +51,7 @@ if (!$currentEntry) {
 }
 
 // Загружаем содержимое записи
-$contentFile = "content/news/{$postId}.html";
+$contentFile = "content/news/{$postId}-{$lang}.html";
 if (!file_exists($contentFile)) {
     include 'pages/404.php';
     http_response_code(404);
@@ -72,37 +82,37 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
     <!-- Левая колонка: Информация о записи -->
     <aside class="blog-single-sidebar">
         <div class="sidebar-header">
-            <h3><?= $lang == 'ru' ? 'О записи' : 'About Post' ?></h3>
+            <h3><?= $singAbout[$lang] ?></h3>
         </div>
         <div class="sidebar-content">
             <div class="post-info">
                 <?php if (!empty($postDate)): ?>
                 <div class="info-item">
-                    <strong><?= $lang == 'ru' ? 'Дата:' : 'Date:' ?></strong>
+                    <strong><?= $singDate[$lang] ?></strong>
                     <span><?= date('d.m.Y', strtotime($postDate)) ?></span>
                 </div>
                 <?php endif; ?>
                 
                 <?php if (!empty($postAuthor)): ?>
                 <div class="info-item">
-                    <strong><?= $lang == 'ru' ? 'Автор:' : 'Author:' ?></strong>
+                    <strong><?= $singAuthor[$lang] ?></strong>
                     <span><?= htmlspecialchars($postAuthor) ?></span>
                 </div>
                 <?php endif; ?>
                 
                 <?php if (!empty($readTime)): ?>
                 <div class="info-item">
-                    <strong><?= $lang == 'ru' ? 'Время чтения:' : 'Read time:' ?></strong>
+                    <strong><?= $singRTime[$lang] ?></strong>
                     <span><?= htmlspecialchars($readTime) ?></span>
                 </div>
                 <?php endif; ?>
                 
                 <?php if (!empty($postTags)): ?>
                 <div class="info-item">
-                    <strong><?= $lang == 'ru' ? 'Теги:' : 'Tags:' ?></strong>
+                    <strong><?= $singTags[$lang] ?></strong>
                     <div class="post-tags">
                         <?php foreach ($postTags as $tag): ?>
-                            <a href="/blog?tag=<?= urlencode($tag) ?>" class="tag">
+                            <a href="/news?tag=<?= urlencode($tag) ?>" class="tag">
                                 <?= htmlspecialchars($tag) ?>
                             </a>
                         <?php endforeach; ?>
@@ -112,22 +122,22 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
             </div>
             
             <!-- Кнопка возврата к списку -->
-            <a href="/blog" class="back-to-list" id="back-to-list">
-                ← <?= $lang == 'ru' ? 'К списку записей' : 'Back to posts' ?>
+            <a href="/news" class="back-to-list" id="back-to-list">
+                ← <?= $singBack[$lang] ?>
             </a>
             
             <!-- Мини-навигация -->
             <?php if ($prevEntry || $nextEntry): ?>
             <div class="mini-navigation">
                 <?php if ($prevEntry): ?>
-                <a href="/blog/<?= htmlspecialchars($prevEntry['id']) ?>" class="nav-mini prev">
-                    ← <?= $lang == 'ru' ? 'Предыдущая' : 'Previous' ?>
+                <a href="/news/<?= htmlspecialchars($prevEntry['id']) ?>" class="nav-mini prev">
+                    ← <?= $singPrev[$lang] ?>
                 </a>
                 <?php endif; ?>
                 
                 <?php if ($nextEntry): ?>
-                <a href="/blog/<?= htmlspecialchars($nextEntry['id']) ?>" class="nav-mini next">
-                    <?= $lang == 'ru' ? 'Следующая' : 'Next' ?> →
+                <a href="/news/<?= htmlspecialchars($nextEntry['id']) ?>" class="nav-mini next">
+                    <?= $singNext[$lang] ?> →
                 </a>
                 <?php endif; ?>
             </div>
@@ -160,7 +170,7 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
             <?php if (!empty($postTags)): ?>
             <div class="post-tags-main">
                 <?php foreach ($postTags as $tag): ?>
-                    <a href="/blog?tag=<?= urlencode($tag) ?>" class="tag">
+                    <a href="/news?tag=<?= urlencode($tag) ?>" class="tag">
                         <?= htmlspecialchars($tag) ?>
                     </a>
                 <?php endforeach; ?>
@@ -177,15 +187,15 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
         <?php if ($prevEntry || $nextEntry): ?>
         <div class="post-navigation">
             <?php if ($prevEntry): ?>
-            <a href="/blog/<?= htmlspecialchars($prevEntry['id']) ?>" class="nav-btn prev">
-                <span class="nav-label"><?= $lang == 'ru' ? 'Предыдущая запись' : 'Previous post' ?></span>
+            <a href="/news/<?= htmlspecialchars($prevEntry['id']) ?>" class="nav-btn prev">
+                <span class="nav-label"><?= $singPrev[$lang] ?></span>
                 <span class="nav-title"><?= htmlspecialchars($prevEntry['title'][$lang] ?? $prevEntry['title']['ru'] ?? '') ?></span>
             </a>
             <?php endif; ?>
             
             <?php if ($nextEntry): ?>
-            <a href="/blog/<?= htmlspecialchars($nextEntry['id']) ?>" class="nav-btn next">
-                <span class="nav-label"><?= $lang == 'ru' ? 'Следующая запись' : 'Next post' ?></span>
+            <a href="/news/<?= htmlspecialchars($nextEntry['id']) ?>" class="nav-btn next">
+                <span class="nav-label"><?= $singNext[$lang] ?></span>
                 <span class="nav-title"><?= htmlspecialchars($nextEntry['title'][$lang] ?? $nextEntry['title']['ru'] ?? '') ?></span>
             </a>
             <?php endif; ?>
@@ -194,8 +204,8 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
         
         <!-- Кнопка возврата к списку -->
         <div class="back-to-list-bottom">
-            <a href="/blog" class="back-btn">
-                ← <?= $lang == 'ru' ? 'Вернуться к списку записей' : 'Back to posts list' ?>
+            <a href="/news" class="back-btn">
+                ← <?= $singBack[$lang] ?>
             </a>
         </div>
     </main>
@@ -203,7 +213,7 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
     <!-- Правая колонка: Навигация по записи -->
     <aside class="post-toc">
         <div class="toc-header">
-            <h4><?= $lang == 'ru' ? 'Содержание' : 'Contents' ?></h4>
+            <h4><?= $singContents[$lang] ?></h4>
         </div>
         <nav class="toc-content">
             <?= $navContent ?>
@@ -587,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backButton.addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.setItem('lastViewedPost', postId);
-            window.location.href = '/blog';
+            window.location.href = '/news';
         });
     }
     
@@ -597,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backBtnBottom.addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.setItem('lastViewedPost', postId);
-            window.location.href = '/blog';
+            window.location.href = '/news';
         });
     }
     
@@ -666,20 +676,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.altKey) {
             <?php if ($prevEntry): ?>
             if (e.key === 'ArrowLeft') {
-                window.location.href = '/blog/<?= addslashes($prevEntry['id']) ?>';
+                window.location.href = '/news/<?= addslashes($prevEntry['id']) ?>';
             }
             <?php endif; ?>
             
             <?php if ($nextEntry): ?>
             if (e.key === 'ArrowRight') {
-                window.location.href = '/blog/<?= addslashes($nextEntry['id']) ?>';
+                window.location.href = '/news/<?= addslashes($nextEntry['id']) ?>';
             }
             <?php endif; ?>
             
             // B - возврат к списку
             if (e.key === 'b' || e.key === 'B' || e.key === 'и' || e.key === 'И') {
                 localStorage.setItem('lastViewedPost', postId);
-                window.location.href = '/blog';
+                window.location.href = '/news';
             }
         }
     });
