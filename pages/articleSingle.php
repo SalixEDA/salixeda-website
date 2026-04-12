@@ -549,6 +549,21 @@ if (preg_match('/<h1[^>]*>(.*?)<\/h1>/', $mainContent, $matches)) {
     font-weight: bold;
 }
 
+/* Предупреждение для разработчиков */
+.dev-note {
+    background: #f0f7ff;
+    border-left: 4px solid #2c7da0;
+    padding: 16px 20px;
+    margin: 20px 0 30px 0;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.dev-note strong {
+    color: #2c7da0;
+    font-size: 15px;
+}
 /* Адаптивность */
 @media (max-width: 1200px) {
     .blog-single-page {

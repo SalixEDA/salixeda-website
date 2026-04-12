@@ -54,6 +54,21 @@
 
   "entries": [
     {
+      "id": "2026-02-04-goGui",
+      "title": {
+        "ru": "GoGui библиотека внутри установщика SalixEDA",
+        "en": "GoGui library inside the SalixEDA installer"
+      },
+      "date": "2026-02-04",
+      "author": "A.Sibilev",
+      "excerpt": {
+        "ru": "Как я взявшись писать инсталлятор для SalixEDA неожиданно написал свою реализацию Gui библиотеки для Go.",
+        "en": "How I, while writing an installer for SalixEDA, unexpectedly wrote my own implementation of a GUI library for Go."
+      },
+      "tags": ["installer"],
+      "read_time": "3 min"
+    },
+    {
       "id": "2026-01-22-stmPins",
       "title": {
         "ru": "Решение проблемы многофункциональных выводов современных микроконтроллеров STM",
