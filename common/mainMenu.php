@@ -56,9 +56,9 @@ $menuItems = [
             'en' => 'Documentation, tutorials, libraries, support'
         ],
         'submenu' => [
-            'doc/userGuide' => [
+            'doc/bookList' => [
                 'name' => ['ru' => 'Документация', 'en' => 'Documentation'],
-                'description' => ['ru' => 'Полное руководство пользователя', 'en' => 'Complete user manual']
+                'description' => ['ru' => 'Руководства, включая Установку, Быстрый старт и др.', 'en' => 'Documentation guides, including Installation, Quick Start, and more.']
             ],
             'videos' => [
                 'name' => ['ru' => 'Видеоуроки', 'en' => 'Video tutorials'],

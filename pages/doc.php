@@ -1,28 +1,95 @@
 <?php
 // pages/doc-template.php
 global $lang, $pageAnchor, $routeParams;
+
+function processMarkdownImages($html)
+  {
+  // Ищем паттерн: <p><img ... />{: .center}</p>
+  $pattern = '/<p><img\s+([^>]+)\/>\{\:\s*\.center\}<\/p>/i';
+  $replacement = '<p align="center"><img $1/></p>';
+
+  return preg_replace($pattern, $replacement, $html);
+  }
+
+
+function fixRelativePathsInHtml($html, $baseUrl) {
+  // Исправляем ссылки <a href="...">
+  $html = preg_replace_callback(
+        '/<a\s+([^>]*?)href="([^"]+)"([^>]*)>/i',
+        function($matches) use ($baseUrl) {
+            $href = $matches[2];
+            // Если путь относительный (не начинается с /, #, http://, https://)
+            if (!preg_match('/^(\\/|#|https?:|mailto:)/i', $href)) {
+                $href = $baseUrl . $href;
+            }
+            return '<a ' . $matches[1] . 'href="' . $href . '"' . $matches[3] . '>';
+        },
+        $html
+  );
+
+  // Исправляем картинки <img src="...">
+  $html = preg_replace_callback(
+        '/<img\s+([^>]*?)src="([^"]+)"([^>]*)>/i',
+        function($matches) use ($baseUrl) {
+            $src = $matches[2];
+            // Если путь относительный (не начинается с /, http://, https://, data:)
+            if (!preg_match('/^(\\/|https?:|data:)/i', $src)) {
+                $src = $baseUrl . $src;
+            }
+            return '<img ' . $matches[1] . 'src="' . $src . '"' . $matches[3] . '>';
+        },
+        $html
+  );
+
+  return $html;
+  }
+
+
 // Разбираем путь
 $parts = explode('/', $routeParams);
 $book = $parts[0] ?? '';           // quickStart
 $section = $parts[1] ?? 'intro';     // intro или toc по умолчанию
 
-// Определяем файлы
-$tocFile = "content/doc/{$book}/toc-{$lang}.html";
-$sectionFile = "content/doc/{$book}/{$section}-{$lang}.html";
+//Сначала пробуем загрузить md
+$tocFile = "content/doc/{$book}/toc-{$lang}.md";
+$sectionFile = "content/doc/{$book}/{$section}-{$lang}.md";
+$tocContent = '';
+$sectionContent = '';
+$mainContent = '';
+$navContent = '';
+if( file_exists($tocFile) ) {
+  require_once 'pages/Parsedown.php';  // единственный внешний файл в вашем проекте
+  $Parsedown = new Parsedown();
 
-// Если книга не существует - 404
-if( !file_exists($tocFile) ) {
-  include 'pages/404.php';
-  exit;
+  // Загружаем данные
+  $tocContent = $Parsedown->text(file_exists($tocFile) ? file_get_contents($tocFile) : '');
+  $sectionContent = $Parsedown->text(file_exists($sectionFile) ? file_get_contents($sectionFile) : '');
+  $mainContent = processMarkdownImages($sectionContent);
+  $navContent = $Parsedown->getToc();
+  }
+else {
+  // Определяем файлы
+  $tocFile = "content/doc/{$book}/toc-{$lang}.html";
+  $sectionFile = "content/doc/{$book}/{$section}-{$lang}.html";
+
+  // Если книга не существует - 404
+  if( !file_exists($tocFile) ) {
+    include 'pages/404.php';
+    exit;
+    }
+
+  // Загружаем данные
+  $tocContent = file_exists($tocFile) ? file_get_contents($tocFile) : '';
+  $sectionContent = file_exists($sectionFile) ? file_get_contents($sectionFile) : '';
+
+  // Извлекаем части секции
+  $mainContent = extractSection($sectionContent, 'MAIN');
+  $navContent = extractSection($sectionContent, 'NAV');
   }
 
-// Загружаем данные
-$tocContent = file_exists($tocFile) ? file_get_contents($tocFile) : '';
-$sectionContent = file_exists($sectionFile) ? file_get_contents($sectionFile) : '';
 
-// Извлекаем части секции
-$mainContent = extractSection($sectionContent, 'MAIN');
-$navContent = extractSection($sectionContent, 'NAV');
+$mainContent = fixRelativePathsInHtml( $mainContent, "/content/doc/{$book}/" );
+
 $metaContent = extractSection($sectionContent, 'META');
 $meta = !empty($metaContent) ? json_decode($metaContent, true) : [];
 

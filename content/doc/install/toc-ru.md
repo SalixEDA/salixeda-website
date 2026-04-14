@@ -1,0 +1,4 @@
+- [Общие сведения](install/intro)
+- [Установка для Windows](install/windows)
+- [Установка для Linux](doc/install/linux)
+- [Удаление SalixEDA с компьютера](doc/install/remove)
