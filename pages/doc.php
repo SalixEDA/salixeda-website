@@ -34,7 +34,7 @@ function fixRelativePathsInHtml($html, $baseUrl) {
             $src = $matches[2];
             // Если путь относительный (не начинается с /, http://, https://, data:)
             if (!preg_match('/^(\\/|https?:|data:)/i', $src)) {
-                $src = $baseUrl . $src;
+                $src = "/content" . $baseUrl . $src;
             }
             return '<img ' . $matches[1] . 'src="' . $src . '"' . $matches[3] . '>';
         },
@@ -88,7 +88,8 @@ else {
   }
 
 
-$mainContent = fixRelativePathsInHtml( $mainContent, "/content/doc/{$book}/" );
+$tocContent  = fixRelativePathsInHtml( $tocContent, "/doc/{$book}/" );
+$mainContent = fixRelativePathsInHtml( $mainContent, "/doc/{$book}/" );
 
 $metaContent = extractSection($sectionContent, 'META');
 $meta = !empty($metaContent) ? json_decode($metaContent, true) : [];
