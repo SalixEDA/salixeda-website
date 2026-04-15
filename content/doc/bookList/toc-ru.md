@@ -1,4 +1,5 @@
+<!--Title Список книг-->
 # Список книг документации
-- [Установка SalixEDA](install)
-- [Быстрый старт](quickStart)
-- [Основные операции](opers)
+- [Установка SalixEDA](/doc/install)
+- [Быстрый старт](/doc/quickStart)
+- [Основные операции](/doc/opers)
