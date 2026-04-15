@@ -204,6 +204,24 @@ function extractSections($html, $sectionNames) {
     return $result;
 }
 
+
+function extractIdent($content, $type) {
+  // Экранируем спецсимволы в типе для безопасного использования в регулярном выражении
+  $escapedType = preg_quote($type, '/');
+
+  // Ищем комментарий вида <!--{type} любой текст до -->
+  // .*? - любой текст (включая пробелы) в нежадном режиме
+  $pattern = '/<!--' . $escapedType . '\s+(.*?)\s*-->/';
+
+  if (preg_match($pattern, $content, $matches)) {
+    // Обрезаем пробелы по краям
+    return trim($matches[1]);
+    }
+
+  return '';
+  }
+
+
 /**
  * Загружает контент страницы из файла
  * @param string $pageName Имя страницы (без пути и расширения)

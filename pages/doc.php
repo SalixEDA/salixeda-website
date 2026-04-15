@@ -57,6 +57,7 @@ $tocContent = '';
 $sectionContent = '';
 $mainContent = '';
 $navContent = '';
+
 if( file_exists($tocFile) ) {
   require_once 'pages/Parsedown.php';  // единственный внешний файл в вашем проекте
   $Parsedown = new Parsedown();
@@ -91,12 +92,12 @@ else {
 $tocContent  = fixRelativePathsInHtml( $tocContent, "/doc/{$book}/" );
 $mainContent = fixRelativePathsInHtml( $mainContent, "/doc/{$book}/" );
 
-$metaContent = extractSection($sectionContent, 'META');
-$meta = !empty($metaContent) ? json_decode($metaContent, true) : [];
+// Заголовок для книги
+$bookTitle = extractIdent( $tocContent, 'Title' );
 
 // Определяем навигацию вперед/назад
-$prevSection = '';// $meta['prev'] ?? getPrevFromToc($tocContent, $section, $book);
-$nextSection = ''; //$meta['next'] ?? getNextFromToc($tocContent, $section, $book);
+$prevSection = extractIdent( $sectionContent, 'Prev' );
+$nextSection = extractIdent( $sectionContent, 'Next' );
 
 // Хлебные крошки
 $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)];
@@ -106,7 +107,7 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
     <!-- Левая колонка: Оглавление книги -->
     <aside class="doc-toc">
         <div class="toc-header">
-            <h3><?= htmlspecialchars($book) ?></h3>
+            <h3><?= $bookTitle ?></h3>
             <button class="toc-toggle" onclick="toggleToc()">≡</button>
         </div>
         <div class="toc-content" id="toc-content">
@@ -117,7 +118,7 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
     <!-- Центральная колонка: Содержимое секции -->
     <main class="doc-main" id="doc-main">
         <!-- Хлебные крошки -->
-        <nav class="doc-breadcrumb">
+<!--        <nav class="doc-breadcrumb">
             <?php foreach ($breadcrumb as $i => $item): ?>
                 <?php if ($i < count($breadcrumb) - 1): ?>
                     <a href="#"><?= htmlspecialchars($item) ?></a> /
@@ -125,7 +126,7 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
                     <span><?= htmlspecialchars($item) ?></span>
                 <?php endif; ?>
             <?php endforeach; ?>
-        </nav>
+        </nav> -->
         
         <!-- Кнопки навигации (верх) -->
         <div class="doc-nav-top">
@@ -290,7 +291,7 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
 }
 
 .doc-breadcrumb {
-    margin-bottom: 25px;
+    //margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
     font-size: 14px;
@@ -334,10 +335,10 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
 .doc-nav-top,
 .doc-nav-bottom {
     display: flex;
-    justify-content: space-between;
-    margin: 30px 0;
+    //justify-content: space-between;
+    //margin: 30px 0;
     padding: 20px 0;
-    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .doc-nav-bottom {
@@ -357,6 +358,21 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
     transition: all 0.3s;
 }
 
+/* Предыдущая кнопка прижимается влево */
+.doc-nav-btn.prev {
+    margin-right: auto;
+}
+
+/* Следующая кнопка прижимается вправо */
+.doc-nav-btn.next {
+    margin-left: auto;
+}
+
+/* Если есть обе кнопки, они будут по краям */
+.doc-nav-btn.prev + .doc-nav-btn.next {
+    margin-left: auto;
+}
+
 .doc-nav-btn:hover {
     background: #3498db;
     color: white;
@@ -364,13 +380,14 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+
 .doc-nav-btn.prev::before {
-    content: '←';
+   // content: '←';
     margin-right: 8px;
 }
 
 .doc-nav-btn.next::after {
-    content: '→';
+ //   content: '→';
     margin-left: 8px;
 }
 
