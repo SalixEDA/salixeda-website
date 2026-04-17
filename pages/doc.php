@@ -12,6 +12,19 @@ function processMarkdownImages($html)
   }
 
 
+function processZoomImages($html) {
+  // Регулярное выражение для поиска всех тегов img
+  $pattern = '/<img([^>]*?)>/i';
+
+  // Добавляем класс zoom-image к каждому изображению
+  $replacement = '<img$1 class="zoom-image">';
+
+  $html = preg_replace($pattern, $replacement, $html);
+
+  return $html;
+  }
+
+
 function fixRelativePathsInHtml($html, $baseUrl) {
   // Исправляем ссылки <a href="...">
   $html = preg_replace_callback(
@@ -98,6 +111,12 @@ $bookTitle = extractIdent( $tocContent, 'Title' );
 // Определяем навигацию вперед/назад
 $prevSection = extractIdent( $sectionContent, 'Prev' );
 $nextSection = extractIdent( $sectionContent, 'Next' );
+
+// Увеличивающиеся картинки
+$zoomedImage = extractIdent( $sectionContent, 'Zoomed' );
+if( $zoomedImage == 'true' ) {
+  $mainContent = processZoomImages($mainContent);
+  }
 
 // Хлебные крошки
 $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)];
@@ -453,6 +472,86 @@ $breadcrumb = $meta['breadcrumb'] ?? ['Документация', ucfirst($book)
     border-left-color: #1976d2;
     font-weight: bold;
 }
+
+
+
+.zoom-image {
+    /* Базовый стиль - ширина 256px, высота автоматическая */
+    width: 384px;
+    height: auto;
+
+    /* Для плавной анимации */
+    transition: all 0.3s ease;
+
+    /* Позиционирование для корректного отображения при наведении */
+    position: relative;
+
+    /* Сохраняем пропорции */
+    object-fit: contain;
+
+    /* Курсор-указатель для интерактивности */
+    cursor: pointer;
+
+    /* Вертикальное выравнивание */
+    vertical-align: middle;
+}
+
+.zoom-image:hover {
+    /* Возвращаем оригинальный размер */
+    width: auto;
+    height: auto;
+
+    /* Максимальная ширина - оригинальный размер */
+    max-width: none;
+
+    /* Абсолютное позиционирование для наложения поверх контента */
+    position: relative;
+    z-index: 9999;
+
+    /* Не раздвигаем текст */
+    transform: scale(1);
+
+    /* Тень для выделения при наведении */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+    /* Добавляем небольшой отступ */
+    margin: 0;
+}
+
+/* Альтернативный вариант с использованием transform (более плавный) */
+/*
+.zoom-image-alt {
+    width: 128px;
+    height: auto;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+*/
+
+/* Дополнительный вариант с использованием max-width для лучшей совместимости */
+/*
+.zoom-image-responsive {
+    max-width: 128px;
+    height: auto;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.zoom-image-responsive:hover {
+    max-width: none;
+    width: auto;
+    height: auto;
+    position: relative;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+*/
+
+
+
 
 /* Адаптивность */
 @media (max-width: 1200px) {
