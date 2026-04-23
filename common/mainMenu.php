@@ -50,7 +50,7 @@ $menuItems = [
         ]
     ],
     'help' => [
-        'name' => ['ru' => 'Ресурсы', 'en' => 'Help'],
+        'name' => ['ru' => 'Ресурсы', 'en' => 'Resources'],
         'description' => [
             'ru' => 'Документация, видеоуроки, библиотеки, поддержка',
             'en' => 'Documentation, tutorials, libraries, support'

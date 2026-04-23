@@ -13,9 +13,11 @@ for manufacturing.
 
 [Read more...](/doc/quickStart)
 
+<!--
 ## Basic Operations
 Describes, in reference format, operations for creating and editing schematics,
 PCB layouts, component libraries, and 3D component representations.
 
 [Read more...](/doc/opers)
 
+-->

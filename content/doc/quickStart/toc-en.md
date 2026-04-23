@@ -1,4 +1,4 @@
-<!--Title Быстрый старт-->
+<!--Title Quick Start-->
 - [Creating a new project and schematic within it](newProject)
 - [Inserting components from the library into the schematic](insertComp)
 - [Inserting nets into the schematic](insertNet)
