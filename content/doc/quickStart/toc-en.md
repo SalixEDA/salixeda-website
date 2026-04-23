@@ -1,0 +1,10 @@
+<!--Title Быстрый старт-->
+- [Creating a new project and schematic within it](newProject)
+- [Inserting components from the library into the schematic](insertComp)
+- [Inserting nets into the schematic](insertNet)
+- [Final schematic formatting](sheetForm)
+- [Creating the PCB outline](createPcb)
+- [Placing components on the PCB](compPlace)
+- [Routing connections](wireTrace)
+- [Adding a polygon](polygon)
+- [Generating manufacturing files](production)
