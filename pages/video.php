@@ -11,14 +11,14 @@ include 'pages/shorts.php';
 
 
 <style>
-/* Стили страницы видео */
+/* Стили для страницы видео */
 .video-page {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 20px;
 }
 
-/* Заголовок */
+/* Заголовок страницы */
 .video-header {
     text-align: center;
     margin-bottom: 40px;
@@ -27,7 +27,7 @@ include 'pages/shorts.php';
 }
 
 .video-header h1 {
-    font-size: 2.2em;
+    font-size: 2em;
     color: #2c3e50;
     margin-bottom: 10px;
 }
@@ -37,11 +37,12 @@ include 'pages/shorts.php';
     color: #7f8c8d;
 }
 
-/* Сетка видео */
+/* Сетка видео - 2 колонки */
 .video-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
+    margin-top: 20px;
 }
 
 /* Карточка видео */
@@ -49,35 +50,20 @@ include 'pages/shorts.php';
     background: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
-/* Контейнер видео */
-.video-container {
-    background: #000;
+/* При фокусе на видео внутри карточки - расширяем карточку */
+.video-card:focus-within {
+    grid-column: span 2;
 }
 
-.video-player {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Информация о видео */
-.video-info {
-    padding: 15px 20px;
-}
-
-.video-title {
-    font-size: 1.2em;
-    color: #2c3e50;
-    margin: 0 0 8px 0;
-    font-weight: 600;
-}
-
+/* Описание сверху */
 .video-description {
+    padding: 15px 15px 0 15px;
     font-size: 0.9em;
-    color: #666;
+    color: #555;
     line-height: 1.4;
 }
 
@@ -85,18 +71,24 @@ include 'pages/shorts.php';
     margin: 0 0 5px 0;
 }
 
-.video-description p:last-child {
-    margin-bottom: 0;
+/* Контейнер видео */
+.video-container {
+    background: #000;
+    padding: 15px;
 }
 
-/* Сообщение об отсутствии видео */
-.no-videos {
-    text-align: center;
-    padding: 60px 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    color: #95a5a6;
-    font-size: 1.1em;
+/* Видео плеер */
+.video-player {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
 }
+
+/* Индикатор фокуса для карточки (опционально) */
+.video-card:focus-within {
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
+}
+
 </style>
 
