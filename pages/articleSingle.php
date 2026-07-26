@@ -1,10 +1,12 @@
 <?php
 // pages/articleSingle.php - С ПРАВИЛЬНЫМИ СТИЛЯМИ
 
-global $lang;
+global $routeParams, $lang;
+
+echo "<!-- Enter articleSingle.php -->\n";
 
 // ID записи из URL
-$postId = $params[0] ?? '';
+$postId = $routeParams; //$params[0] ?? '';
 
 // Загружаем список всех записей
 $entriesFile = 'content/articles/entries.json';
@@ -45,6 +47,7 @@ foreach ($allEntries as $index => $entry) {
 
 // Если запись не найдена - 404
 if (!$currentEntry) {
+    echo "<!-- Record not found -->\n";
     include 'pages/404.php';
     http_response_code(404);
     exit;

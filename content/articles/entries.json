@@ -54,7 +54,7 @@
 
   "entries": [
     {
-      "id": "2026-02-04-goGui",
+      "id": "2026-02-04/goGui",
       "title": {
         "ru": "GoGui библиотека внутри установщика SalixEDA",
         "en": "GoGui library inside the SalixEDA installer"
@@ -69,7 +69,7 @@
       "read_time": "3 min"
     },
     {
-      "id": "2026-01-22-stmPins",
+      "id": "2026-01-22/stmPins",
       "title": {
         "ru": "Решение проблемы многофункциональных выводов современных микроконтроллеров STM",
         "en": "Solution to the problem of multifunctional outputs in modern STM microcontrollers"
@@ -84,7 +84,7 @@
       "read_time": "3 min"
     },
     {
-      "id": "2026-01-16-newSite",
+      "id": "2026-01-16/newSite",
       "title": {
         "ru": "Новый сайт SalixEDA",
         "en": "New site for SalixEDA"

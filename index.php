@@ -245,6 +245,15 @@ function loadPageContent($pageName) {
   
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" data-page-anchor="<?= htmlspecialchars($pageAnchor ?? '') ?>">
+<?php
+echo <<<HTML
+<!--
+    Page file: {$pageFile}
+    Route params: {$routeParams}
+    Page anchor: {$pageAnchor}
+-->
+HTML;
+?>
 <body>
   <?php include 'common/header.php'; ?>
   

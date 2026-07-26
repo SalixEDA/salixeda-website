@@ -14,7 +14,7 @@
         StMicroelectronics в их фирменном программном обеспечении. Речь про CubeIDE,
         где можно в графическом режиме назначить выводам определенные функции и
         задать настройки для периферийных устройств, связанных с этими выводами.</p>
-        <img src="/images/articles/26-01-22-p0.png" alt="Выводы stm" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p0.png" alt="Выводы stm" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
         <h2 id="two-approaches">Два подхода к схемному обозначению</h2>
         <p>Такая многофункциональность создает определенные неудобства для
         схемотехников. Имеются два основных подхода. Первый - сложный: для каждого
@@ -26,7 +26,7 @@
         функция используется в данном проекте. Ну и самое главное: разработчики
         просто ленятся указывать полный список всех возможных функций для каждого
         вывода.</p>
-        <img src="/images/articles/26-01-22-p1.png" alt="Все функции" style="width: 100%; max-width: 600px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p1.png" alt="Все функции" style="width: 100%; max-width: 600px; height: auto; margin: 0 auto 1rem; display: block;">
         <p>Второй основной подход к схемному обозначению микроконтроллеров - это
         не указывать дополнительные функции вовсе. Указываются только основные.
         Именно этот подход является превалирующим на сегодняшний день. Создание
@@ -36,7 +36,7 @@
         это можно определить по названию цепи, однако неудобство для разработчика-схемотехника
         очевидно: ему приходится постоянно переключаться между картой назначений
         выводов и проектируемой схемой.</p>
-        <img src="/images/articles/26-01-22-p2.png" alt="Без функций" style="width: 100%; max-width: 300px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p2.png" alt="Без функций" style="width: 100%; max-width: 300px; height: auto; margin: 0 auto 1rem; display: block;">
         <h2 id="salixeda-solution">Оригинальное решение SalixEDA</h2>
         <p>Для SalixEDA я использую оригинальное решение: беру назначения
         альтернативных функций из конкретного программного проекта. Для реализации этой
@@ -46,25 +46,25 @@
         вывода также рядом указывается параметры альтернативных функций. Это по сути
         заглушки, которые заменятся реальными альтернативными функциями непосредственно
         в схеме.</p>
-        <img src="/images/articles/26-01-22-p3.png" alt="Заготовка" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p3.png" alt="Заготовка" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
         <h4 id="import-from-ioc">Импорт из CubeIDE</h4>
         <p>Работает это следующим образом. Вставляем микроконтроллер в схему как
         обычно. Выделяем микроконтроллер, нажимаем на нем правую кнопку мыши.
         В открывшемся меню выбираем "Параметры выделения" и попадаем в такой диалог.</p>
-        <img src="/images/articles/26-01-22-p4.png" alt="Выделение и параметры" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p4.png" alt="Выделение и параметры" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
         <p>Нажимаем кнопку импорта выводов и выбираем файл ioc нашего проекта.
         В этом файле система CubeIDE хранит назначения альтернативных функций
         выводам, а также настройки периферии. SalixEDA сканирует этот файл и
         выбирает записи, относящиеся к альтернативным функциям выводов. В результате
         получаем такую таблицу.</p>
-        <img src="/images/articles/26-01-22-p5.png" alt="Таблица с альтернативными функциями" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p5.png" alt="Таблица с альтернативными функциями" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto 1rem; display: block;">
         <h4 id="result">Результат на схеме</h4>
         <p>При нажатии кнопки OK этого диалога альтернативные функции выводов, а
         также назначенные имена этих выводов попадают в схемное изображение
         микроконтроллера. На следующем рисунке зеленым обведены альтернативные
         функции выводов микроконтроллера, а оранжевым - имена выводов, назначенные
         разработчиком ПО.</p>
-        <img src="/images/articles/26-01-22-p6.png" alt="Микроконтроллер с альтернативными функциями" style="margin: 0 auto 1rem; display: block;">
+        <img src="/content/articles/2026-01-22/p6.png" alt="Микроконтроллер с альтернативными функциями" style="margin: 0 auto 1rem; display: block;">
 
         <h2 id="conclusion">Итог</h2>
         <p>Таким образом, SalixEDA решает давнюю проблему многофункциональных
