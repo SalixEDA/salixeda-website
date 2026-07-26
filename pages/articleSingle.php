@@ -3,8 +3,6 @@
 
 global $routeParams, $lang;
 
-echo "<!-- Enter articleSingle.php -->\n";
-
 // ID записи из URL
 $postId = $routeParams; //$params[0] ?? '';
 

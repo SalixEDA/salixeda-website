@@ -56,7 +56,37 @@
 
   "entries": [
     {
-      "id": "2026-01-15-release-3-0",
+      "id": "2026-05-06/release-3-5",
+      "title": {
+        "ru": "Добавлена поддержка текстового списка цепей",
+        "en": "Append support for textual net list"
+      },
+      "date": "2024-01-10",
+      "author": "admin",
+      "excerpt": {
+        "ru": "",
+        "en": "Master uses fixed fields to form the PCB outline with mounting holes. The previous board outline, if any, is deleted."
+      },
+      "tags": ["release", "new-features", "update"],
+      "read_time": "1 min"
+    },
+    {
+      "id": "2026-04-08/release-3-4",
+      "title": {
+        "ru": "Добавлен мастер печатных плат",
+        "en": "Append board builder master"
+      },
+      "date": "2024-01-10",
+      "author": "admin",
+      "excerpt": {
+        "ru": "Мастер с помощью фиксированных полей формирует контур печатной платы с отверстиями крепления. Предыдущий контур платы, если есть, то удаляется.",
+        "en": "Master uses fixed fields to form the PCB outline with mounting holes. The previous board outline, if any, is deleted."
+      },
+      "tags": ["release", "new-features", "update"],
+      "read_time": "1 min"
+    },
+    {
+      "id": "2026-01-15/release-3-0",
       "title": {
         "ru": "Релиз SalixEDA 3.0",
         "en": "SalixEDA 3.0 Release"
@@ -69,21 +99,6 @@
       },
       "tags": ["release", "new-features", "update"],
       "read_time": "1 min"
-    },
-    {
-      "id": "2024-01-10-new-simulation",
-      "title": {
-        "ru": "Новый движок моделирования",
-        "en": "New Simulation Engine"
-      },
-      "date": "2024-01-10",
-      "author": "admin",
-      "excerpt": {
-        "ru": "Встроенный симулятор схем с поддержкой SPICE моделей.",
-        "en": "Built-in circuit simulator with SPICE model support."
-      },
-      "tags": ["simulation", "engineering", "spice"],
-      "read_time": "8 min"
     }
   ]
 }

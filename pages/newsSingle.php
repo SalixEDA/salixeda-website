@@ -1,10 +1,10 @@
 <?php
-// pages/articleSingle.php - С ПРАВИЛЬНЫМИ СТИЛЯМИ
+// pages/newsSingle.php - С ПРАВИЛЬНЫМИ СТИЛЯМИ
 
-global $lang;
+global $routeParams, $lang;
 
 // ID записи из URL
-$postId = $params[0] ?? '';
+$postId = $routeParams;
 
 // Загружаем список всех записей
 $entriesFile = 'content/news/entries.json';
