@@ -61,11 +61,11 @@
         "ru": "Добавлена поддержка текстового списка цепей",
         "en": "Append support for textual net list"
       },
-      "date": "2024-01-10",
-      "author": "admin",
+      "date": "2026-05-06",
+      "author": "A.Sibilev",
       "excerpt": {
-        "ru": "",
-        "en": "Master uses fixed fields to form the PCB outline with mounting holes. The previous board outline, if any, is deleted."
+        "ru": "Для микросхем, содержащих несколько одинаковых элементов в одном корпусе часто не показывают выводы питания в схеме. Вместо этого их определяют специальным текстовым списком цепей.",
+        "en": "For ICs that contain multiple identical elements in a single package, the power supply pins are often not shown in the schematic. Instead, they are defined using a special text list of net connections."
       },
       "tags": ["release", "new-features", "update"],
       "read_time": "1 min"
@@ -76,8 +76,8 @@
         "ru": "Добавлен мастер печатных плат",
         "en": "Append board builder master"
       },
-      "date": "2024-01-10",
-      "author": "admin",
+      "date": "2026-04-08",
+      "author": "A.Sibilev",
       "excerpt": {
         "ru": "Мастер с помощью фиксированных полей формирует контур печатной платы с отверстиями крепления. Предыдущий контур платы, если есть, то удаляется.",
         "en": "Master uses fixed fields to form the PCB outline with mounting holes. The previous board outline, if any, is deleted."
