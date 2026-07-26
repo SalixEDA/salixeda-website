@@ -60,7 +60,7 @@ $menuItems = [
                 'name' => ['ru' => 'Документация', 'en' => 'Documentation'],
                 'description' => ['ru' => 'Руководства, включая Установку, Быстрый старт и др.', 'en' => 'Documentation guides, including Installation, Quick Start, and more.']
             ],
-            'videos' => [
+            'video' => [
                 'name' => ['ru' => 'Видеоуроки', 'en' => 'Video tutorials'],
                 'description' => ['ru' => 'Наглядные обучающие ролики', 'en' => 'Visual tutorial videos']
             ],

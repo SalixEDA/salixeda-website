@@ -55,6 +55,22 @@
   "entries": [
     {
       "id": "2026-02-04/goGui",
+      "id": "2026-05-08-netPinList",
+      "title": {
+        "ru": "Текстовый список цепей в схеме",
+        "en": "Textual net pin list in schematic"
+      },
+      "date": "2026-05-08",
+      "author": "A.Sibilev",
+      "excerpt": {
+        "ru": "Восстановление в SalixEDA режима текстового списка цепей, присутствовавшего в древних версиях и впоследствии исключенного.",
+        "en": "Restoring in SalixEDA the text-based netlist mode that was present in legacy versions and subsequently removed."
+      },
+      "tags": ["netList"],
+      "read_time": "3 min"
+    },
+    {
+      "id": "2026-02-04-goGui",
       "title": {
         "ru": "GoGui библиотека внутри установщика SalixEDA",
         "en": "GoGui library inside the SalixEDA installer"
