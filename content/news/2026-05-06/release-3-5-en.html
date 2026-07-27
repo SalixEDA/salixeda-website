@@ -1,0 +1,38 @@
+<!-- MAIN_START -->
+<article class="blog-post">
+    <div class="post-content">
+        <p class="post-date">May 6, 2026</p>
+
+        <h2 id="release3_5">Added support for textual netlist</h2>
+
+        <p>In the early days of SalixEDA, when SN74...-type chips were still widely used,
+        the system had a textual netlist. It was a special object in the schematic that listed
+        connections to nets in text form. Typically, this was used for connecting power nets.</p>
+
+        <code>1. Connect pins 14 of chips DD1, DD3 to net +5V.</code>
+
+        <p>This is the external representation of the netlist. Internally, such an entry was translated
+        into connections between the corresponding chip pins.</p>
+
+        <p>When transitioning to the modern SalixEDA, this functionality was removed because at that
+        time SN74...-type chips were practically no longer used in schematics, as the general trend
+        toward higher integration made their use unnecessary. And in those cases where the use of
+        such chips was still needed, the power net connection problem could be solved by adding
+        a dedicated power section to multi-section components or by adding power lines directly
+        to the component's schematic symbol — for single-section components.</p>
+
+        <p>And today this functionality has been brought back to SalixEDA, since the system is positioned
+        as suitable for education, and in the process of teaching students, SN74...-type chips are
+        still widely used. Therefore, to make it possible to design circuits with such chips
+        in the familiar way, i.e., via a textual netlist, the "Text Netlist" object and the corresponding
+        mode have been added to the SalixEDA system.</p>
+    </div>
+</article>
+<!-- MAIN_END -->
+
+
+<!-- NAV_START -->
+<ul>
+    <li><a href="#release3_5">Added support for textual netlist</a></li>
+</ul>
+<!-- NAV_END -->
