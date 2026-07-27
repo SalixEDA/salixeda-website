@@ -1,0 +1,239 @@
+<!-- MAIN_START -->
+<div class="doc-section">
+
+<div class="timeline">
+  <div class="timeline-node">
+    <div class="timeline-year">1991</div>
+    <div class="timeline-icon">📟</div>
+    <div class="timeline-label">first encounter with P‑CAD</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-year">1997</div>
+    <div class="timeline-icon">💡</div>
+    <div class="timeline-label">start of development</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-year">2000</div>
+    <div class="timeline-icon">🚀</div>
+    <div class="timeline-label">first working version</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-year">2012</div>
+    <div class="timeline-icon">🖥️🐧</div>
+    <div class="timeline-label">migration to Qt</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-year">2026</div>
+    <div class="timeline-icon">✨</div>
+    <div class="timeline-label">SalixEDA (rebranding)</div>
+  </div>
+  <div class="timeline-continue">
+    <span>→</span>
+    <div class="timeline-label">to be continued</div>
+  </div>
+</div>
+
+  <h2 id="first">The first spark</h2>
+  <p>Almost 30 years have passed! I don't remember much, but I'll try to
+  document the key milestones here.</p>
+  <p>1991. As a student, I was doing an internship at a design bureau.
+  Computers with color VGA monitors were just starting to appear, and that bureau
+  was adopting P-CAD 4.5 into their production workflow. Much has faded from
+  memory, but the impression this system made on me remains:
+  placing components from a library right on the computer screen! Against the
+  backdrop of drafting all of this on a drawing board, the new technology looked
+  incredibly cool.</p>
+  <p>The ability to output the drawing results to a plotter also seemed
+  immensely powerful. I was so captivated by the technology that I even completed
+  my graduation project using this system — probably the only one in my entire
+  class. Even the instructors viewed such innovations with skepticism.</p>
+  <p>After graduating, I went to work at the same design bureau, though in a
+  different department.</p>
+  <p>Time passed, and computer power grew. Color monitors became the norm.
+  Windows began to emerge. I was one of the first to install it, around 1994.
+  The version was 3.11. There wasn't much benefit from it, but it could run
+  multiple programs simultaneously, which made switching between the individual
+  components of the PCAD package faster. That's when the first attempts at
+  "automation" began — essentially, launching the individual software parts of
+  the suite sequentially.</p>
+
+  <h2 id="start">The beginning of design</h2>
+  <p>Using PCAD continued until the arrival of Windows 95. It then became clear
+  that Windows technology was the future, and PCAD was becoming obsolete.</p>
+  <p>Sometime between 1997 and 1998, work on my own program began. The idea was
+  to implement something similar to P-CAD, but in a native Windows environment.
+  The "single file" concept for a project was adopted immediately. I wanted to
+  eliminate the separate "schematic to board" transition step, which never went
+  smoothly. But the most inconvenient part was making changes: if the board was
+  already half-routed, adding anything to the schematic was extremely difficult.</p>
+  <p>Furthermore, I planned to eliminate the scattering of different editors and
+  put everything into one program.</p>
+  <p>The target system was the wonderful Windows 95. And the development
+  language — my beloved C++. I studied Windows interface programming in C.
+  But since the program was in C++, I built my own GUI library — an analog of
+  MFC (Microsoft Foundation Classes).</p>
+  <p>At the time of its creation, the program was called PasCAD. It's an acronym
+  for something fun from student life, but I've forgotten what exactly.</p>
+  <p>After about a year of passionate work (after all, it was a hobby), the
+  program became usable. It was a wonderful time. I was young, full of strength
+  and energy, and didn't have a family yet. So I'd come home from my main job,
+  have a quick dinner, and sit down to program until four in the morning. The
+  next day — repeat.</p>
+  <p>To avoid getting "drowned" in programming, I decided to forgo an
+  auto-router. The thing is, at that time Specctra was popular — it was
+  a placement tool, auto-router, and PCB editor all in one. On the other hand,
+  it lacked component creation and board creation tools. It was assumed that
+  these were done by other means — there was no way to "drop" components onto
+  a board from a library, nor to define connections between components.</p>
+  <p>Thus, I ended up with a "symbiosis" with Specctra: my program handled
+  schematic drawing, component creation, and automatic linking of the schematic
+  to the board, while Specctra handled placement and routing. Although
+  placement could also be done in my program.</p>
+
+  <h2 id="activ">Period of active use</h2>
+  <p>The symbiosis with Specctra lasted quite a long time. The core of the
+  program was complete. I periodically added improvements in the form of
+  automating certain actions, since I was actively using my own program and saw
+  user needs from the inside.</p>
+  <p>I spent a lot of time on libraries. A decent collection accumulated, but
+  today it's all outdated and practically useless to anyone.</p>
+  <p>I did a lot of work on documentation. Wrote a manual, created a help
+  system. I even added visual animation: I didn't record screen video. Instead,
+  I took screenshots, wrote scripts for mouse movements, compiled everything
+  into a single animation stream, and around the turn of the millennium added
+  sound accompaniment.</p>
+
+  <h2 id="stag">Development stagnation</h2>
+  <p>From 2000 to 2006, the program actively developed and was even distributed.
+  Then my main job started taking up more and more time, leaving almost none for
+  program development.</p>
+  <p>As a result, core development stalled for six long years. Of course, I
+  periodically returned to it to fix bugs that still surfaced, and implemented
+  automation ideas. During this period, all the "wizards" for creating resistors,
+  capacitors, etc. were added.</p>
+
+  <h2 id="introQt">Encounter with Qt</h2>
+  <p>I don't exactly remember when I first came across Qt. Probably around
+  2006-2007, and it was version 4. It turned out to be so convenient and
+  powerful that I stuck with it through the entire journey: through version 5
+  and now 6. I should say, I didn't adopt it right away. There were several
+  attempts, initially unsuccessful, but each time — more advanced.</p>
+  <p>As a result, I studied the library quite well. And then the first thoughts
+  crept in: "Should I rewrite my program in Qt?" I must say, the task was
+  enormous. Essentially, I needed to rewrite the system from scratch, so to
+  speak, "inspired by" the original.</p>
+  <p>The benefits were numerous. Most importantly, I would gain cross-platform
+  support! My program could run on both Windows and the increasingly popular (at
+  least in broader circles) Linux. In addition, the library immediately provided
+  multilingual support. Actually, I had tried to translate the previous version
+  into other languages, but those attempts were far inferior to the well-oiled
+  system adopted in Qt.</p>
+
+  <h2 id="rewrite">Rewriting in Qt</h2>
+  <p>I believe it's easier to develop from scratch than to do such a radical
+  refactoring. When you develop sequentially — you constantly compile some
+  intermediate code and see the results iteratively. It's inspiring. When I was
+  rewriting in Qt, it was different: I had to rewrite everything and only then
+  could I see the result.</p>
+  <p>I don't even remember how long the rewrite took. I think I spent at least
+  three months before I could compile it and actually try it out. Naturally, it
+  didn't turn out as I wanted. And a long polishing process began, which
+  stretched out for another six months.</p>
+  <p>By about 2013, the program was more or less usable. During the refactoring
+  process, I reworked everything: from the storage method and file format to the
+  interaction structure.</p>
+  <p>Then — rewriting the documentation again, another help system, and another
+  animation support system. True, for this support I used the advances of
+  progress: sound accompaniment was generated directly by the program via
+  synthesis (through the Qt library).</p>
+  <p>Rebuilding libraries from scratch (although I did import from the previous
+  version) — components were created anew. Mainly because the old ones were
+  falling out of use and new ones were appearing.</p>
+  <p>The extensive programming experience gained over all those years of work
+  was not in vain. The code became more elegant, the program more structured and
+  reliable. I finally added full undo functionality — something that was always
+  missing in the previous version.</p>
+  <p>At this point, I also abandoned the use of Specctra. Finally, my program
+  became self-sufficient and required no external tools to work. I built a
+  decent component placement tool and tried to implement ideas drawn from
+  Specctra's manual routing mode. At the same time, I must honestly admit:
+  I didn't reach Specctra's level, but I did bring in something new — automatic
+  trace completion. With this service, routing became radically faster.</p>
+  <p>I consciously chose not to implement automatic routing. Despite the
+  presence of an auto-router in Specctra itself, neither I nor my colleagues
+  used it. It took too long to configure to get an adequate result. In practice,
+  it was faster to route by hand in a day than to spend two days fiddling with
+  settings and then another two days cleaning up the mess the auto-router made.</p>
+  <p>Also, board complexity was growing. Clock frequencies were rising. It
+  became clear that good routing is not just about finding a path for traces,
+  but routing them correctly. Plus the widespread adoption of polygons. All of
+  this reduced the value of automatic routing.</p>
+  <p>Along with the rewrite in Qt, the program got a new name — SaliCAD. This
+  is another acronym from the names of my family members, and besides, this name
+  was available for use as a domain.</p>
+
+  <h2 id="exten">Development and new features</h2>
+  <p>Perhaps the main innovation is 3D support, although its practical benefit
+  is debatable — it's just to see what the board will look like. Cool, but
+  that's about it.</p>
+  <p>For real utility, it's necessary to export to modern exchange formats,
+  such as STEP. But I haven't implemented that yet — it's very complex.</p>
+  <p>For ease of use, import is also needed. Import from STEP is also very
+  complex, so I don't have it. Of course, I could have used the OpenCascade 3D
+  library, but it's so large that I didn't dare to adopt it, especially since
+  3D functionality in my case is purely illustrative.</p>
+  <p>For import, I implemented STL and VRML — formats that don't require
+  breaking curved surfaces into triangles (they're already triangulated).</p>
+  <p>And I implemented a truly cool thing: a built-in 3D editor.</p>
+  <p>I'm familiar with modern 3D design systems like SolidWorks and SolidEdge
+  and clearly understand the process. Creating 3D models for components required
+  something completely different: minimal effort (i.e., simplicity) and the
+  ability to reuse component parts. For example, draw one pin — and I wanted to
+  be able to replicate it not only within a single component but also easily
+  transfer it to others, since components largely consist of repeating parts.
+  Moreover, some are identical in shape but differ in size.</p>
+
+  <h2 id="refact">Final refactoring in late 2025</h2>
+  <p>Gradually, I came to the idea of a complete rebranding. At its core —
+  a change of image. Along with the image, the name and website changed.</p>
+  <p>The current project name is SalixEDA. The choice was driven by practical
+  considerations: uniqueness, usability, and continuity from the previous name.</p>
+  <p>The main technical innovation at this stage was the modernization of the
+  library system. I should say that since the transition to the Qt framework,
+  libraries had already become global. I created a website that, in addition to
+  the site itself, also hosted a global library.</p>
+  <p>The essence of the library modernization is the introduction of a private
+  cloud, which I offer to any SalixEDA user completely free and automatically.
+  This gives you a choice: you can publish your work, keep it secret from
+  everyone, combine both approaches, or even sever the connection to my site
+  entirely and keep everything within your enterprise or even on a single
+  computer. Naturally, this requires some expertise, but it's entirely
+  feasible.</p>
+
+  <h2 id="epilog">Instead of a conclusion</h2>
+  <p>By early 2026, the project has gone through another stage of
+  rethinking. A rebranding was carried out, resulting in the program
+  receiving a new name — SalixEDA.</p>
+  <p>The name change reflects not so much technical changes as an attempt to
+  neatly separate the current stage of development from previous versions.</p>
+  <p>Development continues. As before, it proceeds gradually: through refining
+  existing features, fixing accumulated limitations, and implementing new ideas
+  and technologies as they are thought through.</p>
+  <p>The project's history does not end here. And I am confident that I will
+  add more and more pages to it...</p>
+</div>
+<!-- MAIN_END -->
+
+<!-- NAV_START -->
+<ul>
+  <li><a href="#first">The first spark</a></li>
+  <li><a href="#start">The beginning of design</a></li>
+  <li><a href="#activ">Period of active use</a></li>
+  <li><a href="#stag">Development stagnation</a></li>
+  <li><a href="#introQt">Encounter with Qt</a></li>
+  <li><a href="#rewrite">Rewriting in Qt</a></li>
+  <li><a href="#exten">Development and new features</a></li>
+  <li><a href="#refact">Final refactoring in late 2025</a></li>
+  <li><a href="#epilog">Instead of a conclusion</a></li>
+</ul>
+<!-- NAV_END -->
