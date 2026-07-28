@@ -1,6 +1,28 @@
 <?php
 // config.php
 
+//Разбираемся со статистикой
+if( isset($_COOKIE['salixVisitorId']) ) {
+  // Кука есть → считаем
+  $visitorId = $_COOKIE['salixVisitorId'];
+  $line = implode('|', [
+        $visitorId,
+        date('Y-m-d H:i:s'),
+        $_SERVER['REQUEST_URI'],
+        $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+        $_SERVER['HTTP_REFERER'] ?? '',
+        $_SERVER['REMOTE_ADDR'] ?? ''
+    ]) . "\n";
+
+  file_put_contents('/var/log/salixeda.org/visits.log', $line, FILE_APPEND | LOCK_EX);
+} else {
+  // Куки нет → генерируем, отправляем, но НЕ считаем
+  $visitorId = bin2hex(random_bytes(16));
+  setcookie('salixVisitorId', $visitorId, time() + 86400 * 365, '/', '', false, true);
+  // ❌ Не передаем в статистику
+}
+
+
 // Запускаем сессию
 session_start();
 

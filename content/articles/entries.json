@@ -55,7 +55,6 @@
   "entries": [
     {
       "id": "2026-05-08/netPinList",
-      "id": "2026-05-08-netPinList",
       "title": {
         "ru": "Текстовый список цепей в схеме",
         "en": "Textual net pin list in schematic"
@@ -71,7 +70,6 @@
     },
     {
       "id": "2026-02-04/goGui",
-      "id": "2026-02-04-goGui",
       "title": {
         "ru": "GoGui библиотека внутри установщика SalixEDA",
         "en": "GoGui library inside the SalixEDA installer"

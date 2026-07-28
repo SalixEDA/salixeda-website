@@ -1,0 +1,323 @@
+<!-- MAIN_START -->
+
+<h1>SalixEDA Features</h1>
+
+<p>
+SalixEDA is an integrated electronics design system
+focused on rapid development and reuse of solutions.
+</p>
+
+
+<div class="block">
+<h2 id="core">Single project file</h2>
+<p>
+The project is a single entity: the schematic, components, and board are all stored in one file.
+This simplifies transfer and storage — just copy one file.
+</p>
+<p>
+Components are fixed within the project. Changes to the library do not affect already completed projects.
+If necessary, components can be updated with conflict resolution.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="sync">Schematic-to-board connection</h2>
+<p>
+The schematic and PCB are synchronized automatically in real time.
+Adding components and nets is instantly reflected on the board.
+</p>
+<p>
+This allows changes to be made right during the routing process,
+without performing additional synchronization steps.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="libs">Component libraries</h2>
+
+<p>
+The system uses a combined component storage model,
+including a local library, a global repository, and a private cloud.
+</p>
+
+<p>
+The local library is automatically populated with components from opened projects.
+Just open someone else's project — and all the components used in it
+become available in your library.
+</p>
+
+<p>
+Components can be created directly during the design process.
+After creation, a component is finalized and saved to the library
+with a version indicator (based on creation time).
+</p>
+
+<p>
+The system tracks library changes automatically:
+when files are added or copied from outside, new components
+are detected and registered without any additional user actions.
+</p>
+
+<p>
+The global repository is a public component library
+available to all users. It contains components
+published by their authors.
+</p>
+
+<p>
+Each user is automatically provided with a private cloud
+that synchronizes with the local library.
+</p>
+
+<p>
+The private cloud enables:
+</p>
+<ul>
+  <li>synchronizing components across different computers</li>
+  <li>working from different locations (home, work, etc.)</li>
+  <li>organizing collaborative work</li>
+</ul>
+
+<p>
+For collaboration, simply share the cloud ID —
+after that, the libraries of all participants will automatically synchronize
+with each other in near real time.
+</p>
+</div>
+
+
+
+
+<div class="block">
+<h2 id="fragments">Fragments and reusable solutions</h2>
+<p>
+You can create a library of fragments — ready-made circuit solutions —
+and reuse them across projects.
+</p>
+<p>
+When inserting a component, the system can suggest an existing fragment
+that uses it.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="calc">Circuit calculations</h2>
+<p>
+Calculation formulas can be embedded into the schematic and linked to component parameters.
+</p>
+<p>
+This allows automatic calculation of component values and simplifies design.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="multiboard">One schematic — multiple boards</h2>
+
+<p>
+Within a single project, you can use one schematic for several PCBs.
+</p>
+
+<p>
+Regions are defined on the schematic, each corresponding to a separate board.
+</p>
+
+<p>
+Components that fall into a region are automatically placed on the corresponding board.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="web">Publishing and sharing</h2>
+<p>
+Fragments can be exported to a text format
+that can be embedded into an HTML page.
+</p>
+<p>
+A user can copy such a fragment directly from the browser
+and paste it into a project without downloading any files.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="ui">Editing</h2>
+<p>
+Working with multiple projects and windows simultaneously is supported.
+</p>
+<p>
+Batch operations and "smart" editing modes are available,
+simplifying routine tasks.
+</p>
+</div>
+
+
+
+<div class="block">
+<h2 id="placement">Component placement</h2>
+<p>
+During component placement on the board, you can select components directly from the schematic.
+</p>
+<p>
+This speeds up workflow and reduces the number of errors.
+</p>
+</div>
+
+
+
+
+<div class="block">
+<h2 id="routing">Routing</h2>
+
+<p>
+The system does not have a classic automatic router.
+The main focus is on convenience and speed of manual routing.
+</p>
+
+<p>
+A semi-automatic mode is used: the user starts routing a trace,
+and the system suggests a way to complete it.
+</p>
+
+<p>
+After each cursor movement, the suggested option is recalculated automatically.
+The screen simultaneously displays:
+</p>
+<ul>
+  <li>the trace being routed by the user</li>
+  <li>the completion option suggested by the system</li>
+</ul>
+
+<p>
+The user can accept the suggested option or continue routing manually.
+This approach allows full control over the routing process
+while significantly speeding it up.
+</p>
+
+<p>
+Multilayer PCBs are supported:
+</p>
+<ul>
+  <li>up to 30 layers</li>
+  <li>through-hole vias</li>
+  <li>blind vias</li>
+</ul>
+</div>
+
+
+
+<div class="block">
+<h2 id="rules">Routing rules</h2>
+
+<p>
+The system uses routing rules that define clearances and other constraints.
+</p>
+
+<p>
+Rules are defined at two levels:
+</p>
+<ul>
+  <li>general rules for the entire board</li>
+  <li>individual rules for specific nets</li>
+</ul>
+
+<p>
+If a net does not have its own rules defined,
+the board rules are used.
+</p>
+
+<p>
+Rules are automatically enforced by the system and cannot be violated during routing.
+</p>
+</div>
+
+
+
+
+<div class="block">
+<h2 id="3d">3D modeling</h2>
+<p>
+The built-in parametric editor allows you to create 3D models of components.
+</p>
+<p>
+Model import is supported (VRML, STL).
+</p>
+</div>
+
+
+<div class="block">
+<h2 id="production">Manufacturing</h2>
+
+<p>
+The system provides all necessary data for PCB manufacturing
+and device assembly.
+</p>
+
+<p>
+Export is supported for:
+</p>
+<ul>
+  <li>GERBER — for PCB fabrication</li>
+  <li>ASM — input file for automatic component placement machines</li>
+</ul>
+
+<p>
+Project documentation is generated:
+</p>
+<ul>
+  <li>BOM (Bill of Materials)</li>
+</ul>
+</div>
+
+
+<div class="block">
+<h2 id="common">General features</h2>
+<ul>
+  <li>open source code</li>
+  <li>cross-platform (Windows, Linux)</li>
+  <li>multilingual interface support</li>
+</ul>
+</div>
+
+<!-- MAIN_END -->
+
+
+
+
+
+
+
+
+
+<!-- NAV_START -->
+<h3>Contents</h3>
+<ul>
+  <li><a href="#core">Single project</a></li>
+  <li><a href="#sync">Schematic–board connection</a></li>
+  <li><a href="#libs">Component libraries</a></li>
+  <li><a href="#fragments">Fragments</a></li>
+  <li><a href="#calc">Circuit calculations</a></li>
+  <li><a href="#multiboard">One schematic - multiple boards</a></li>
+  <li><a href="#web">Publishing</a></li>
+  <li><a href="#ui">Editing</a></li>
+  <li><a href="#placement">Component placement</a></li>
+  <li><a href="#routing">Routing</a></li>
+  <li><a href="#rules">Routing rules</a></li>
+  <li><a href="#3d">3D</a></li>
+  <li><a href="#production">Manufacturing</a></li>
+  <li><a href="#common">General features</a></li>
+</ul>
+<!-- NAV_END -->
+
+
+

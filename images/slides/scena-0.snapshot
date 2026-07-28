@@ -1,0 +1,77 @@
+{
+    "AType": "Guider snapshot file",
+    "AVersion": 1,
+    "Current editor": 0,
+    "Open editor list": [
+        {
+            "Grid-x": 250,
+            "Grid-y": 250,
+            "ObjectClass": "800",
+            "ObjectName": "Sheet1",
+            "Origin-x": 29250,
+            "Origin-y": 20500,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.008428370753077308,
+            "is3d": false
+        },
+        {
+            "Grid-x": 2500,
+            "Grid-y": 2500,
+            "ObjectClass": "1000",
+            "ObjectName": "Default plate",
+            "Origin-x": 29774,
+            "Origin-y": 31500,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.005618958429231282,
+            "is3d": false
+        },
+        {
+            "Grid-x": 2500,
+            "Grid-y": 2500,
+            "ObjectClass": "1000",
+            "ObjectName": "Default plate",
+            "Origin-x": 29774,
+            "Origin-y": 31500,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.005618958429231282,
+            "is3d": true
+        },
+        {
+            "Grid-x": 25,
+            "Grid-y": 25,
+            "ObjectClass": "20",
+            "ObjectName": "stm32F072Cxx wf (symbol)",
+            "Origin-x": 5250,
+            "Origin-y": 5250,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.02142906359815338,
+            "is3d": false
+        },
+        {
+            "Grid-x": 2500,
+            "Grid-y": 2500,
+            "ObjectClass": "80",
+            "ObjectName": "lqfp48 plastic fpt-48p-m05 (part)",
+            "Origin-x": 2750,
+            "Origin-y": 4499,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.034547878249277936,
+            "is3d": false
+        },
+        {
+            "Grid-x": 2500,
+            "Grid-y": 2500,
+            "ObjectClass": "80",
+            "ObjectName": "lqfp48 plastic fpt-48p-m05 (part)",
+            "Origin-x": 2750,
+            "Origin-y": 4499,
+            "ProjectName": "projectSnapshot-0-0",
+            "Scale": 0.034547878249277936,
+            "is3d": true
+        }
+    ],
+    "Project current": 0,
+    "Projects": [
+        "projectSnapshot-0-0"
+    ]
+}
