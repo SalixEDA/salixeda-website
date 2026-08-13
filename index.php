@@ -5,19 +5,45 @@
 if( isset($_COOKIE['salixVisitorId']) ) {
   // Кука есть → считаем
   $visitorId = $_COOKIE['salixVisitorId'];
-  $line = implode('|', [
+
+  // Берем последние 16 символов (8 байт времени)
+  $timeHex = substr($visitorId, 16);
+
+  // Преобразуем hex обратно в бинарные данные
+  $timeBytes = hex2bin($timeHex);
+
+  // Распаковываем 8 байт в число (big-endian)
+  $timestamp = unpack('J', $timeBytes)[1]; // 'J' - unsigned long long
+
+  if( $timestamp + 5 < time() ) {
+    // Ротация лога (если больше 10 МБ)
+    $logFile = '/var/log/salixeda.org/visits.log';
+    if( file_exists($logFile) && filesize($logFile) > 10 * 1024 * 1024 ) {
+      $handle = fopen($logFile, 'r');
+      //Берем последние 5МБ логов
+      fseek($handle, -5 * 1024 * 1024, SEEK_END);
+      $content = fread($handle, 5 * 1024 * 1024);
+      fclose($handle);
+      //... и перезаписываем ими содержимое логов. Теперь копим следующие 5МБ
+      file_put_contents($logFile, $content, LOCK_EX);
+      }
+    $line = implode('|', [
         $visitorId,
         date('Y-m-d H:i:s'),
         $_SERVER['REQUEST_URI'],
         $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
         $_SERVER['HTTP_REFERER'] ?? '',
         $_SERVER['REMOTE_ADDR'] ?? ''
-    ]) . "\n";
+      ]) . "\n";
 
-  file_put_contents('/var/log/salixeda.org/visits.log', $line, FILE_APPEND | LOCK_EX);
+    file_put_contents('/var/log/salixeda.org/visits.log', $line, FILE_APPEND | LOCK_EX);
+    }
+
 } else {
   // Куки нет → генерируем, отправляем, но НЕ считаем
-  $visitorId = bin2hex(random_bytes(16));
+  $randomBytes = random_bytes(8);
+  $timeBytes = pack( 'J', time() ); // 'J' - unsigned long long (64-bit) в big-endian
+  $visitorId = bin2hex( $randomBytes . $timeBytes );
   setcookie('salixVisitorId', $visitorId, time() + 86400 * 365, '/', '', false, true);
   // ❌ Не передаем в статистику
 }
@@ -104,6 +130,7 @@ $url = trim($_GET['url'] ?? '', '/');
 
 // Защита от path traversal
 if( preg_match('/\.\.|\\\\|\/\/|^\//', $url) ) {
+  setcookie('salixVisitorId', $visitorId, time() - 3600, '/', '', false, true);
   $pageFile = 'pages/404.php';
   $pageAnchor = null;
   $routeParams = '';
@@ -163,6 +190,7 @@ else {
         } 
       else {
         $pageFile = 'pages/404.php';
+        setcookie('salixVisitorId', $visitorId, time() - 3600, '/', '', false, true);
         http_response_code(404);
         }
       } 
