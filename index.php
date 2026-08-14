@@ -1,10 +1,12 @@
 <?php
 // config.php
 
+$salixVisitorId = 'salixVisitorUId';
+
 //Разбираемся со статистикой
-if( isset($_COOKIE['salixVisitorId']) ) {
+if( isset($_COOKIE[$salixVisitorId]) ) {
   // Кука есть → считаем
-  $visitorId = $_COOKIE['salixVisitorId'];
+  $visitorId = $_COOKIE[$salixVisitorId];
 
   // Берем последние 16 символов (8 байт времени)
   $timeHex = substr($visitorId, 16);
@@ -36,7 +38,7 @@ if( isset($_COOKIE['salixVisitorId']) ) {
         $_SERVER['REMOTE_ADDR'] ?? ''
       ]) . "\n";
 
-    file_put_contents('/var/log/salixeda.org/visits.log', $line, FILE_APPEND | LOCK_EX);
+    file_put_contents( $logFile, $line, FILE_APPEND | LOCK_EX);
     }
 
 } else {
@@ -44,7 +46,7 @@ if( isset($_COOKIE['salixVisitorId']) ) {
   $randomBytes = random_bytes(8);
   $timeBytes = pack( 'J', time() ); // 'J' - unsigned long long (64-bit) в big-endian
   $visitorId = bin2hex( $randomBytes . $timeBytes );
-  setcookie('salixVisitorId', $visitorId, time() + 86400 * 365, '/', '', false, true);
+  setcookie( $salixVisitorId, $visitorId, time() + 86400 * 365, '/', '', false, true );
   // ❌ Не передаем в статистику
 }
 
@@ -130,7 +132,7 @@ $url = trim($_GET['url'] ?? '', '/');
 
 // Защита от path traversal
 if( preg_match('/\.\.|\\\\|\/\/|^\//', $url) ) {
-  setcookie('salixVisitorId', $visitorId, time() - 3600, '/', '', false, true);
+  setcookie( $salixVisitorId, $visitorId, time() - 3600, '/', '', false, true);
   $pageFile = 'pages/404.php';
   $pageAnchor = null;
   $routeParams = '';
@@ -190,7 +192,7 @@ else {
         } 
       else {
         $pageFile = 'pages/404.php';
-        setcookie('salixVisitorId', $visitorId, time() - 3600, '/', '', false, true);
+        setcookie( $salixVisitorId, $visitorId, time() - 3600, '/', '', false, true);
         http_response_code(404);
         }
       } 
