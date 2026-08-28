@@ -56,6 +56,21 @@
 
   "entries": [
     {
+      "id": "2026-08-28/public-github-repos",
+      "title": {
+        "ru": "Репозитории проекта на GitHub сделаны публичными",
+        "en": "Project repositories on GitHub are now public"
+      },
+      "date": "2026-08-28",
+      "author": "A.Sibilev",
+      "excerpt": {
+        "ru": "Завершена плановая подготовка исходных кодов SalixEDA, и официальные репозитории проекта переведены в публичный доступ. Прямые ссылки на организацию GitHub добавлены в раздел скачивания сайта.",
+        "en": "The planned preparation of the SalixEDA source codes is complete, and the official project repositories have been made public. Direct links to the GitHub organization are now available in the site's download section."
+      },
+      "tags": ["github", "open-source", "update"],
+      "read_time": "1 min"
+    },
+    {
       "id": "2026-05-06/release-3-5",
       "title": {
         "ru": "Добавлена поддержка текстового списка цепей",

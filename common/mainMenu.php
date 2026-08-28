@@ -25,6 +25,10 @@ $menuItems = [
             'download#installation' => [
                 'name' => ['ru' => 'Установка', 'en' => 'Installation'],
                 'description' => ['ru' => 'Инструкции по установке', 'en' => 'Installation instructions']
+            ],
+            'download#githubref' => [
+                'name' => ['ru' => 'Исходный код', 'en' => 'Source Code'],
+                'description' => ['ru' => 'Ссылка на репозиторий исходного кода', 'en' => 'Source code repository link']
             ]
         ]
     ],
