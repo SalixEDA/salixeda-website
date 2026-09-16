@@ -56,6 +56,21 @@
 
   "entries": [
     {
+      "id": "2026-09-16/release-3-8",
+      "title": {
+        "ru": "Релиз 3.8 с новыми возможностями и исправлениями",
+        "en": "Release 3.8 with new features and bug fixes"
+      },
+      "date": "2026-09-16",
+      "author": "A.Sibilev",
+      "excerpt": {
+        "ru": "Исправлено рисование дуг при трансформации. Исправлено рисование дуг в gerber. Исправлено формирование заголовка gerber-файлов. Добавлен мастер форматов для схем. Добавлено контекстное меню в режим выбора с поворотом и зеркальностью для графики. Добавлена поддержка экспорта текста в gerber, есть английский и русский шрифты.",
+        "en": "Fixed arc drawing during transformation and in Gerber. Fixed Gerber file header generation. Added a format wizard for schematics. Added a context menu to the selection mode with rotation and mirroring for graphics. Added support for exporting text to Gerber, featuring both English and Russian fonts."
+      },
+      "tags": ["release", "new-features", "update"],
+      "read_time": "1 min"
+    },
+    {
       "id": "2026-08-28/public-github-repos",
       "title": {
         "ru": "Репозитории проекта на GitHub сделаны публичными",

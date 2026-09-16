@@ -1,0 +1,63 @@
+<!-- MAIN_START -->
+<article class="blog-post">
+    <div class="post-content">
+        <p class="post-date">September 16, 2026</p>
+
+        <h2 id="release3_8">Release 3.8 with New Features and Bug Fixes</h2>
+
+        <h3 id="fixes">Bug Fixes</h3>
+
+        <ul>
+          <li>Fixed arc drawing during transformation.<br>
+          Due to the specifics of the internal representation of arcs, their rotation or mirroring
+          could sometimes lead to incorrect rendering. The internal storage format has been fixed,
+          and arcs are now displayed correctly regardless of transformations.</li>
+
+          <li>Exporting arcs to a Gerber file was executed with an error.<br>
+          The corrected internal storage format for arcs resolved the issue
+          with arc rendering in Gerber files. It is now performed correctly regardless
+          of transformations.</li>
+
+          <li>When generating headers in Gerber files, an outdated format was used, causing
+          some Gerber viewers or import tools to display the file incorrectly or refuse to open them at all.<br>
+          The deprecated formats have been removed, and Gerber files now open correctly
+          in all software.</li>
+
+        </ul>
+
+        <h3 id="possibilities">Additions and New Features</h3>
+
+        <ul>
+          <li>Added a schematic format wizard.<br>
+          As you know, schematics are designed within specialized borders of various
+          standards. The SalixEDA library contains borders according to ISO and GOST standards.
+          The format wizard allows you to quickly insert a sheet border format into a schematic, as well as
+          replace it. For example, a schematic was initially developed using an A3 border, but
+          later, as it grew, switching to A2 was required. The format wizard
+          allows performing such a replacement in just a few steps.</li>
+
+          <li>Added a context menu to the selection mode. This context menu
+          allows, among other things, rotating selected graphic elements,
+          as well as mirroring them. Introducing these two operations speeds up
+          drawing new components, including both schematic symbols and footprints.<br>
+          Graphic elements include lines, arcs, rectangles, and circles, including filled ones.</li>
+
+          <li>Added support for exporting text to a Gerber file.<br>To generate
+          silkscreen layers (text labels and drawings on the board printed with ink), it is often necessary to output
+          actual text. Until now, text was not exported to Gerber.
+          This feature has now been implemented using an embedded vector font.
+          Currently, the font supports English and Russian languages.
+          Upon request, support for specific characters of German
+          and other alphabets can be added.</li>
+        </ul>
+    </div>
+</article>
+<!-- MAIN_END -->
+
+
+<!-- NAV_START -->
+<ul>
+    <li><a href="#fixes">Bug Fixes</a></li>
+    <li><a href="#possibilities">Additions and New Features</a></li>
+</ul>
+<!-- NAV_END -->
